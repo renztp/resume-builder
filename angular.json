@@ -32,6 +32,9 @@
               }
             ],
             "styles": [
+              // "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/themes/lara-dark-teal/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -98,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "7f2a20e3-4335-4b92-86e8-b1b95f147966"
   }
 }

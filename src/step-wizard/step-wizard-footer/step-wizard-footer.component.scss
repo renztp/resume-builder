@@ -1,0 +1,13 @@
+:host {
+  .step-wizard-footer {
+    &__button-group {
+      button {
+        margin-right: 5px;
+
+        &:last {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

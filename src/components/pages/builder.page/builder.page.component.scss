@@ -1,0 +1,10 @@
+:host {
+
+  .app-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30vw 1fr;
+  }
+}

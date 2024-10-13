@@ -1,0 +1,8 @@
+<div class="app-wrapper">
+  <app-sidebar>
+    <div class="card">
+      <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
+    </div>
+  </app-sidebar>
+  <app-layout-previewer></app-layout-previewer>
+</div>

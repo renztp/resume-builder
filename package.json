@@ -1,7 +1,9 @@
 {
   "name": "resume-builder",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
+    "electron": "electron .",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -18,6 +20,8 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "normalize.css": "^8.0.1",
+    "primeng": "^17.18.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -27,6 +31,7 @@
     "@angular/cli": "^18.2.4",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "electron": "^32.2.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
