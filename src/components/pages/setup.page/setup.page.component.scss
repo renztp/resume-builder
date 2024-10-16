@@ -1,0 +1,13 @@
+:host {
+  .wrapper {
+    width: 100%;
+    max-width: 550px;
+    margin: 10em auto 0 auto;
+    display: block;
+  }
+
+  p-button, button {
+    display: block;
+    width: 100%;
+  }
+}
