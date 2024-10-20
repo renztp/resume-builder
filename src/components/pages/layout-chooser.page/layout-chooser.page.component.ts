@@ -1,12 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, signal, effect } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @Component({
   selector: 'app-layout-chooser.page',
   standalone: true,
-  imports: [],
+  imports: [RadioButtonModule, FormsModule, ButtonModule, RouterLink],
   templateUrl: './layout-chooser.page.component.html',
   styleUrl: './layout-chooser.page.component.scss'
 })
 export class LayoutChooserPageComponent {
+  layout!: string;
 
+  constructor(private router: Router) {
+
+  }
+
+  changeSelectedLayout(layout: string) {
+    this.layout = layout;
+    console.log('layout', this.layout);
+  }
+
+  navigateBuilder() {
+    this.router.navigate(['/builder', { layout: this.layout }])
+  }
 }

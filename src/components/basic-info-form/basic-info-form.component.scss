@@ -1,0 +1,18 @@
+:host {
+  .e-input {
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: column;
+
+    label {
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+  }
+
+  .e-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+}

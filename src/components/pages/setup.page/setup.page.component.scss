@@ -6,8 +6,18 @@
     display: block;
   }
 
-  p-button, button {
+  .p-button {
     display: block;
-    width: 100%;
+    width: 100% !important;
+  }
+
+  .button-wrapper {
+    text-align: center;
+  }
+}
+
+:host ::ng-deep {
+  .button-wrapper p-button button {
+    margin-bottom: 8px;
   }
 }

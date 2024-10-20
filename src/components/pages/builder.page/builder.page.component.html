@@ -2,6 +2,12 @@
   <app-sidebar>
     <div class="card">
       <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
+      <ng-container *ngIf="activeItem?.title === 'basic-info'">
+        <app-basic-info-form (next)="navigateNext()"></app-basic-info-form>
+      </ng-container>
+      <ng-container *ngIf="activeItem?.title === 'work-experience'">
+        <app-work-experience-form></app-work-experience-form>
+      </ng-container>
     </div>
   </app-sidebar>
   <app-layout-previewer></app-layout-previewer>

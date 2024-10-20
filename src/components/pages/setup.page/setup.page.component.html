@@ -1,8 +1,19 @@
 <div class="wrapper">
   <p-card header="Choose how to save your resume">
-    <p class="m-0">
+    <p class="" class="button-wrapper">
       <p-button label="Use my Google Drive for saving"></p-button>
-      <p-button label="Export to JSON for future reuse"></p-button>
+      <p-button label="Export to JSON for future reuse" (click)="showDialog()"></p-button>
     </p>
   </p-card>
 </div>
+
+<p-dialog
+  header="Json Setup"
+  [modal]="true"
+  [(visible)]="jsonModalVisibility"
+  [style]="{ width: '20vw' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true">
+  <p-button label="Create New Resume" routerLink="/layout-chooser"></p-button><br>
+  <p-button label="Upload Json File"></p-button>
+</p-dialog>
