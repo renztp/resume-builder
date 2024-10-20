@@ -7,6 +7,7 @@ import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 
 @Component({
@@ -19,18 +20,23 @@ import { ToastModule } from 'primeng/toast';
 })
 export class BasicInfoFormComponent {
   @Output() next = new EventEmitter<void>();
+  @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
 
   constructor(formBuilder: UntypedFormBuilder, private messageService: MessageService) {
     this.formGroup = formBuilder.group({
-      picture: [null, [ Validators.required ]],
-      name: [null, [ Validators.required ]],
-      occupation: [null, [ Validators.required ]],
-      email: [null, [ Validators.required, Validators.email ]],
-      phoneNumber: [null, [ Validators.required ]],
-      location: [null, [ Validators.required ]],
-      bio: [null, [ Validators.required ]],
+      basicInfo: formBuilder.group({
+        picture: [null, [Validators.required]],
+        name: [null, [Validators.required]],
+        occupation: [null, [Validators.required]],
+        email: [null, [Validators.required, Validators.email]],
+        phoneNumber: [null, [Validators.required]],
+        location: [null, [Validators.required]],
+        bio: [null, [Validators.required]],
+      })
     })
+
+    this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => this.changed.emit(value));
   }
 
   onUpload(event: any) {

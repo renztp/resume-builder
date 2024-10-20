@@ -1,41 +1,43 @@
 <form [formGroup]="formGroup">
-  <div class="picture-wrapper">
-    <h2>Picture</h2>
-    <div class="card flex justify-content-center">
-      <p-toast />
-      <!-- Change this to custom UI with cloud icon -->
-      <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]"
-                    url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
-                    (onUpload)="onUpload($event)" />
-    </div>
-  </div>
-  <div class="basic-info-wrapper">
-    <h2>Basic Info</h2>
-    <div class="e-input">
-      <label for="username">Name</label>
-      <input pInputText id="name" formControlName="name" />
-    </div>
-    <div class="e-input">
-      <label for="username">Occupation</label>
-      <input pInputText id="occupation" formControlName="occupation" />
-    </div>
-    <div class="e-grid">
-      <div class="e-input">
-        <label for="username">Email</label>
-        <input pInputText id="email" formControlName="email" />
-      </div>
-      <div class="e-input">
-        <label for="username">Phone Number</label>
-        <input pInputText id="phoneNumber" formControlName="phoneNumber" />
+  <div formGroupName="basicInfo">
+    <div class="picture-wrapper">
+      <h2>Picture</h2>
+      <div class="card flex justify-content-center">
+        <p-toast />
+        <!-- Change this to custom UI with cloud icon -->
+        <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]"
+                      url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
+                      (onUpload)="onUpload($event)" />
       </div>
     </div>
-    <div class="e-input">
-      <label for="username">Location</label>
-      <input pInputText id="location" formControlName="location" />
-    </div>
-    <div class="e-input">
-      <label for="username">Bio</label>
-      <p-editor formControlName="bio" [style]="{ height: '320px' }" />
+    <div class="basic-info-wrapper">
+      <h2>Basic Info</h2>
+      <div class="e-input">
+        <label for="username">Name</label>
+        <input pInputText id="name" formControlName="name" />
+      </div>
+      <div class="e-input">
+        <label for="username">Occupation</label>
+        <input pInputText id="occupation" formControlName="occupation" />
+      </div>
+      <div class="e-grid">
+        <div class="e-input">
+          <label for="username">Email</label>
+          <input pInputText id="email" formControlName="email" />
+        </div>
+        <div class="e-input">
+          <label for="username">Phone Number</label>
+          <input pInputText id="phoneNumber" formControlName="phoneNumber" />
+        </div>
+      </div>
+      <div class="e-input">
+        <label for="username">Location</label>
+        <input pInputText id="location" formControlName="location" />
+      </div>
+      <div class="e-input">
+        <label for="username">Bio</label>
+        <p-editor formControlName="bio" [style]="{ height: '320px' }" />
+      </div>
     </div>
   </div>
   <div class="g-align-right">

@@ -3,7 +3,7 @@
     <div class="card">
       <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
       <ng-container *ngIf="activeItem?.title === 'basic-info'">
-        <app-basic-info-form (next)="navigateNext()"></app-basic-info-form>
+        <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)"></app-basic-info-form>
       </ng-container>
       <ng-container *ngIf="activeItem?.title === 'work-experience'">
         <app-work-experience-form></app-work-experience-form>

@@ -11,7 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BasicInfoFormComponent } from "../../basic-info-form/basic-info-form.component";
 import { WorkExperienceFormComponent } from '../../work-experience-form/work-experience-form.component';
+import { BasicInfo } from '../../../models/basic';
+import { WorkExperience } from '../../../models/work-experience';
+import { Education } from '../../../models/education';
 
+interface ResumeData {
+  basicInfo?: BasicInfo;
+  workExperience?: WorkExperience[];
+  education?: Education[];
+}
 
 @Component({
   selector: 'app-builder.page',
@@ -21,6 +29,7 @@ import { WorkExperienceFormComponent } from '../../work-experience-form/work-exp
   styleUrl: './builder.page.component.scss'
 })
 export class BuilderPageComponent {
+  resumeData: ResumeData = {};
   items: MenuItem[] = [];
 
   activeItem: MenuItem | undefined;
@@ -52,5 +61,9 @@ export class BuilderPageComponent {
       this.activeItem = this.items[currentIndex + 1];
       console.log('activeItem', this.activeItem);
     }
+  }
+
+  onDataChanged($event: any) {
+    console.log($event);
   }
 }
