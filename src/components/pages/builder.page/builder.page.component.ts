@@ -59,5 +59,9 @@ export class BuilderPageComponent {
     if($event.basicInfo) {
       this.resumeData.basicInfo = $event.basicInfo;
     }
+
+    if($event.workExperiences) {
+      this.resumeData.workExperience = $event.workExperiences;
+    }
   }
 }

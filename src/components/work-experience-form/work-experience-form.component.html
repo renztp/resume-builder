@@ -1,10 +1,9 @@
 <form [formGroup]="formGroup">
-      <button (click)="addWorkExperience()">Add</button>
-  <div formArrayName="workExperience">
-    <div class="work-experience-wrapper">
-      <h2>Work Experience</h2>
-      <ng-container *ngFor="let workExperience of workExperiences.controls;let i=index">
-        <div formGroupName="workExperience">
+  <h2>Work Experience</h2>
+  <div>
+    <div class="work-experience-wrapper" formArrayName="workExperiences">
+      <ng-container *ngFor="let workExperience of workExperiences.controls;let i=index" [formGroupName]="i">
+        <div class="work-experience-item">
           <div class="e-input">
             <label for="username">Company Name</label>
             <input pInputText id="companyName" formControlName="companyName" />
@@ -35,4 +34,5 @@
       </ng-container>
     </div>
   </div>
+  <p-button (click)="addWorkExperience()">Add Job Experience</p-button>
 </form>

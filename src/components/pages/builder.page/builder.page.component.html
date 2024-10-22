@@ -6,7 +6,7 @@
         <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [resumeData]="resumeData"></app-basic-info-form>
       </ng-container>
       <ng-container *ngIf="activeItem?.title === 'work-experience'">
-        <app-work-experience-form [resumeData]="resumeData"></app-work-experience-form>
+        <app-work-experience-form [resumeData]="resumeData" (changed)="onDataChanged($event)"></app-work-experience-form>
       </ng-container>
     </div>
   </app-sidebar>
