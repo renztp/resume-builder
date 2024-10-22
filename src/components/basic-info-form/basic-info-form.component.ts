@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -8,6 +8,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { ResumeData } from '../../models/resume-data';
+import { BasicInfo } from '../../models/basic';
 
 
 @Component({
@@ -21,6 +23,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class BasicInfoFormComponent {
   @Output() next = new EventEmitter<void>();
   @Output() changed = new EventEmitter<FormGroup>();
+  @Input() resumeData: ResumeData = {};
   formGroup: FormGroup;
 
   constructor(formBuilder: UntypedFormBuilder, private messageService: MessageService) {
@@ -39,11 +42,31 @@ export class BasicInfoFormComponent {
     this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => this.changed.emit(value));
   }
 
+  ngOnInit() {
+    if(this.resumeData?.basicInfo) {
+      this.assignExistingBasicInfoToForm(this.resumeData.basicInfo);
+    }
+  }
+
   onUpload(event: any) {
       this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
   }
 
   navigateNext() {
     this.next.emit();
+  }
+
+  private assignExistingBasicInfoToForm(basicInfoData: BasicInfo) {
+    this.formGroup.patchValue({
+      basicInfo: {
+        picture: basicInfoData.picture,
+        name: basicInfoData.name,
+        occupation: basicInfoData.occupation,
+        email: basicInfoData.email,
+        phoneNumber: basicInfoData.phoneNumber,
+        location: basicInfoData.location,
+        bio: basicInfoData.bio
+      }
+    })
   }
 }

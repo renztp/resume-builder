@@ -1,12 +1,12 @@
 export interface BasicInfo {
-  firstName: string;
-  lastName: string;
+  name: string;
+  picture: string;
   email: string;
   phoneNumber: string;
   address: string;
-  city: string;
+  location: string;
   bio: string;
-  profession: string;
+  occupation: string;
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, effect, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -11,15 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BasicInfoFormComponent } from "../../basic-info-form/basic-info-form.component";
 import { WorkExperienceFormComponent } from '../../work-experience-form/work-experience-form.component';
-import { BasicInfo } from '../../../models/basic';
-import { WorkExperience } from '../../../models/work-experience';
-import { Education } from '../../../models/education';
-
-interface ResumeData {
-  basicInfo?: BasicInfo;
-  workExperience?: WorkExperience[];
-  education?: Education[];
-}
+import { ResumeData } from '../../../models/resume-data';
 
 @Component({
   selector: 'app-builder.page',
@@ -64,6 +56,8 @@ export class BuilderPageComponent {
   }
 
   onDataChanged($event: any) {
-    console.log($event);
+    if($event.basicInfo) {
+      this.resumeData.basicInfo = $event.basicInfo;
+    }
   }
 }

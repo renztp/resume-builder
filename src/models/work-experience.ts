@@ -1,6 +1,6 @@
 export interface WorkExperience {
   companyName: string;
-  position: string;
+  occupation: string;
   startYear: string;
   endYear: string;
   description: string;

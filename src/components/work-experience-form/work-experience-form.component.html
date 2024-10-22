@@ -1,1 +1,38 @@
-<p>work-experience-form works!</p>
+<form [formGroup]="formGroup">
+      <button (click)="addWorkExperience()">Add</button>
+  <div formArrayName="workExperience">
+    <div class="work-experience-wrapper">
+      <h2>Work Experience</h2>
+      <ng-container *ngFor="let workExperience of workExperiences.controls;let i=index">
+        <div formGroupName="workExperience">
+          <div class="e-input">
+            <label for="username">Company Name</label>
+            <input pInputText id="companyName" formControlName="companyName" />
+          </div>
+          <div class="e-input">
+            <label for="username">Occupation</label>
+            <input pInputText id="occupation" formControlName="occupation" />
+          </div>
+          <div class="e-grid">
+            <div class="e-input">
+              <label for="username">Start Year</label>
+              <input pInputText id="startYear" formControlName="startYear" />
+            </div>
+            <div class="e-input">
+              <label for="username">End Year</label>
+              <input pInputText id="endYear" formControlName="endYear" />
+            </div>
+          </div>
+          <div class="e-input">
+            <label for="username">Description</label>
+            <input pInputText id="description" formControlName="description" />
+          </div>
+          <div class="e-input">
+            <label for="username">Url</label>
+            <input pInputText id="url" formControlName="url" />
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form>
