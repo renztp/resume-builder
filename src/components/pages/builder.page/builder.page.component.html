@@ -8,6 +8,9 @@
       <ng-container *ngIf="activeItem?.title === 'work-experience'">
         <app-work-experience-form [resumeData]="resumeData" (changed)="onDataChanged($event)"></app-work-experience-form>
       </ng-container>
+      <ng-container *ngIf="activeItem?.title === 'education'">
+        <app-education-form [resumeData]="resumeData" (changed)="onDataChanged($event)"></app-education-form>
+      </ng-container>
     </div>
   </app-sidebar>
   <app-layout-previewer></app-layout-previewer>

@@ -1,1 +1,41 @@
-<p>education-form works!</p>
+<form [formGroup]="formGroup">
+  <h2>Education</h2>
+  <div>
+    <p-accordion [multiple]="true" class="education-wrapper">
+      <div formArrayName="educations">
+        <p-accordionTab [header]="educations.controls[i].value.schoolName|| 'Education ' + (i+1)"
+                        class="accordion-item" *ngFor="let education of educations.controls;let i=index"
+                        [formGroupName]="i">
+          <div class="e-input">
+            <label for="username">School Name</label>
+            <input pInputText id="schoolName" formControlName="schoolName" />
+          </div>
+          <div class="e-input">
+            <label for="username">Degree</label>
+            <input pInputText id="degree" formControlName="degree" />
+          </div>
+          <div class="e-grid">
+            <div class="e-input">
+              <label for="username">Start Year</label>
+              <input pInputText id="startYear" formControlName="startYear" />
+            </div>
+            <div class="e-input">
+              <label for="username">End Year</label>
+              <input pInputText id="endYear" formControlName="endYear" />
+            </div>
+          </div>
+          <div class="e-input">
+            <label for="username">Description</label>
+            <input pInputText id="description" formControlName="description" />
+          </div>
+          <div class="e-input">
+            <label for="username">Logo</label>
+            <input pInputText id="logo" formControlName="logo" />
+          </div>
+          <p-button label="Delete Item" severity="danger" (click)="removeEducation(i)" />
+        </p-accordionTab>
+      </div>
+    </p-accordion>
+  </div>
+  <p-button (click)="addEducation()">Add Education</p-button>
+</form>

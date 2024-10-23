@@ -12,11 +12,12 @@ import { CommonModule } from '@angular/common';
 import { BasicInfoFormComponent } from "../../basic-info-form/basic-info-form.component";
 import { WorkExperienceFormComponent } from '../../work-experience-form/work-experience-form.component';
 import { ResumeData } from '../../../models/resume-data';
+import { EducationFormComponent } from '../../education-form/education-form.component';
 
 @Component({
   selector: 'app-builder.page',
   standalone: true,
-  imports: [FormsModule, CommonModule, TabMenuModule, SidebarComponent, LayoutPreviewerComponent, ButtonModule, BasicInfoFormComponent, WorkExperienceFormComponent],
+  imports: [FormsModule, CommonModule, TabMenuModule, SidebarComponent, LayoutPreviewerComponent, ButtonModule, BasicInfoFormComponent, WorkExperienceFormComponent, EducationFormComponent],
   templateUrl: './builder.page.component.html',
   styleUrl: './builder.page.component.scss'
 })

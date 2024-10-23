@@ -9,11 +9,12 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { WorkExperience } from '../../models/work-experience';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { AccordionModule } from 'primeng/accordion';
 
 @Component({
   selector: 'app-work-experience-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule],
   templateUrl: './work-experience-form.component.html',
   styleUrl: './work-experience-form.component.scss'
 })
@@ -59,5 +60,9 @@ export class WorkExperienceFormComponent {
 
   get workExperiences() {
     return this.formGroup.controls['workExperiences'] as FormArray;
+  }
+
+  removeWorkExperience(index: number) {
+    this.workExperiences.removeAt(index);
   }
 }
