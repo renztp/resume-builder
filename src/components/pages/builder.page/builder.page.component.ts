@@ -13,6 +13,9 @@ import { BasicInfoFormComponent } from "../../basic-info-form/basic-info-form.co
 import { WorkExperienceFormComponent } from '../../work-experience-form/work-experience-form.component';
 import { ResumeData } from '../../../models/resume-data';
 import { EducationFormComponent } from '../../education-form/education-form.component';
+import { BasicInfo } from '../../../models/basic';
+import { WorkExperience } from '../../../models/work-experience';
+import { Education } from '../../../models/education';
 
 @Component({
   selector: 'app-builder.page',
@@ -22,13 +25,41 @@ import { EducationFormComponent } from '../../education-form/education-form.comp
   styleUrl: './builder.page.component.scss'
 })
 export class BuilderPageComponent {
-  resumeData: ResumeData = {};
+  resumeData: ResumeData;
+  basicInfo: BasicInfo;
+  workExperience: WorkExperience[] = [];
+  education: Education[] = [];
   items: MenuItem[] = [];
 
   activeItem: MenuItem | undefined;
   statez: any = {};
 
-  constructor(private router: ActivatedRoute) { }
+  constructor(private router: ActivatedRoute) {
+    this.resumeData = {
+      basicInfo: {
+        name: '',
+        occupation: '',
+        email: '',
+        phoneNumber: '',
+        location: '',
+        bio: '',
+        picture: ''
+      },
+      workExperience: [],
+      education: []
+    };
+    this.basicInfo = {
+      picture: '',
+      name: '',
+      occupation: '',
+      email: '',
+      phoneNumber: '',
+      location: '',
+      bio: ''
+    };
+    this.workExperience = [];
+    this.education = [];
+  }
 
   ngOnInit() {
     this.statez = this.router.snapshot?.params;
@@ -58,11 +89,11 @@ export class BuilderPageComponent {
 
   onDataChanged($event: any) {
     if($event.basicInfo) {
-      this.resumeData.basicInfo = $event.basicInfo;
+      this.basicInfo = $event.basicInfo;
     }
 
     if($event.workExperiences) {
-      this.resumeData.workExperience = $event.workExperiences;
+      this.workExperience = $event.workExperiences;
     }
   }
 }

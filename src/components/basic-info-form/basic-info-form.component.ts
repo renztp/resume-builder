@@ -8,22 +8,30 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { ResumeData } from '../../models/resume-data';
 import { BasicInfo } from '../../models/basic';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-basic-info-form',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule],
+  imports: [ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, CommonModule],
   providers: [MessageService, HttpClient],
   templateUrl: './basic-info-form.component.html',
   styleUrl: './basic-info-form.component.scss'
 })
 export class BasicInfoFormComponent {
+  @Input() basicInfo: BasicInfo = {
+    picture: '',
+    name: '',
+    occupation: '',
+    email: '',
+    phoneNumber: '',
+    location: '',
+    bio: ''
+  };
   @Output() next = new EventEmitter<void>();
   @Output() changed = new EventEmitter<FormGroup>();
-  @Input() resumeData: ResumeData = {};
   formGroup: FormGroup;
 
   constructor(formBuilder: UntypedFormBuilder, private messageService: MessageService) {
@@ -39,12 +47,13 @@ export class BasicInfoFormComponent {
       })
     })
 
+
     this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => this.changed.emit(value));
   }
 
   ngOnInit() {
-    if(this.resumeData?.basicInfo) {
-      this.assignExistingBasicInfoToForm(this.resumeData.basicInfo);
+    if(this.basicInfo) {
+      this.assignExistingBasicInfoToForm(this.basicInfo);
     }
   }
 
@@ -57,16 +66,6 @@ export class BasicInfoFormComponent {
   }
 
   private assignExistingBasicInfoToForm(basicInfoData: BasicInfo) {
-    this.formGroup.patchValue({
-      basicInfo: {
-        picture: basicInfoData.picture,
-        name: basicInfoData.name,
-        occupation: basicInfoData.occupation,
-        email: basicInfoData.email,
-        phoneNumber: basicInfoData.phoneNumber,
-        location: basicInfoData.location,
-        bio: basicInfoData.bio
-      }
-    })
+    this.formGroup.controls['basicInfo'].patchValue(basicInfoData);
   }
 }

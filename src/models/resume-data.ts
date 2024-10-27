@@ -4,6 +4,6 @@ import { WorkExperience } from "./work-experience";
 
 export interface ResumeData {
   basicInfo?: BasicInfo;
-  workExperience?: WorkExperience[];
-  education?: Education[];
+  workExperience: WorkExperience[];
+  education: Education[];
 }

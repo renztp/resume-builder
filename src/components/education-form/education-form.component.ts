@@ -19,7 +19,7 @@ import { Education } from '../../models/education';
   styleUrl: './education-form.component.scss'
 })
 export class EducationFormComponent {
-  @Input() resumeData: ResumeData = {};
+  @Input() education?: Education[];
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
   foo: any;
@@ -35,14 +35,16 @@ export class EducationFormComponent {
   }
 
   ngOnInit() {
-    if(this.resumeData.education) {
-      this.assignExistingEducation(this.resumeData.education);
+    if(this.education) {
+      this.assignExistingEducation(this.education);
     }
   }
 
 
-  private assignExistingEducation(education: Education[]) {
-    this.formGroup.patchValue(education)
+  private assignExistingEducation(education?: Education[]) {
+    if(education) {
+      this.formGroup.patchValue(education)
+    }
   }
 
   addEducation() {

@@ -12,13 +12,13 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
 
 @Component({
-  selector: 'app-work-experience-form',
+  selector: 'app-dynamic-form-array',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule],
-  templateUrl: './work-experience-form.component.html',
-  styleUrl: './work-experience-form.component.scss'
+  templateUrl: './dynamic-form-array.component.html',
+  styleUrl: './dynamic-form-array.component.scss'
 })
-export class WorkExperienceFormComponent {
+export class DynamicFormArray {
   @Input() workExperience: WorkExperience[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;

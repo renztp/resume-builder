@@ -1,5 +1,5 @@
-<form [formGroup]="formGroup">
-  <h2>Work Experience</h2>
+<h2>Work Experience</h2>
+<form [formGroup]="formGroup" *ngIf="!loading">
   <div>
     <!-- TODO: Make this more readable and clean, maybe create a reusable component -->
     <p-accordion [multiple]="true" class="work-experience-wrapper">
@@ -38,5 +38,5 @@
       </div>
     </p-accordion>
   </div>
-  <p-button (click)="addWorkExperience()">Add Job Experience</p-button>
 </form>
+<p-button (click)="addWorkExperience()">Add Job Experience</p-button>
