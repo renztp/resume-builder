@@ -95,5 +95,9 @@ export class BuilderPageComponent {
     if($event.workExperiences) {
       this.workExperience = $event.workExperiences;
     }
+
+    if($event.educations) {
+      this.education = $event.educations;
+    }
   }
 }

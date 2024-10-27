@@ -10,16 +10,17 @@ import { CommonModule } from '@angular/common';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
 import { Education } from '../../models/education';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-education-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule, CalendarModule],
   templateUrl: './education-form.component.html',
   styleUrl: './education-form.component.scss'
 })
 export class EducationFormComponent {
-  @Input() education?: Education[];
+  @Input() education: Education[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
   foo: any;
@@ -35,17 +36,11 @@ export class EducationFormComponent {
   }
 
   ngOnInit() {
-    if(this.education) {
+    if(this.education?.length > 0) {
       this.assignExistingEducation(this.education);
     }
   }
 
-
-  private assignExistingEducation(education?: Education[]) {
-    if(education) {
-      this.formGroup.patchValue(education)
-    }
-  }
 
   addEducation() {
     const education = this.formBuilder.group({
@@ -58,6 +53,32 @@ export class EducationFormComponent {
     })
 
     this.educations.push(education);
+  }
+
+  private assignExistingEducation(education: Education[]) {
+    const educationArray = this.formGroup.get('educations') as FormArray;
+    educationArray.clear();
+
+    education.forEach((educationItem: any) => {
+      const group = this.buildEducationGroup();
+      Object.keys(group.controls).forEach(key => {
+        group.patchValue({
+          [key]: educationItem[key]
+        })
+      })
+      educationArray.push(group);
+    })
+  }
+
+  private buildEducationGroup() {
+    return this.formBuilder.group({
+      schoolName: [null, [Validators.required]],
+      degree: [null, [Validators.required]],
+      startYear: [null, [Validators.required]],
+      endYear: [null],
+      description: [null],
+      logo: [null]
+    })
   }
 
   get educations() {

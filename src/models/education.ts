@@ -1,5 +1,5 @@
 export interface Education {
-  school: string;
+  schoolName: string;
   degree: string;
   startYear: string;
   endYear: string;

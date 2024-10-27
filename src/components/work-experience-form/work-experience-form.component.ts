@@ -10,11 +10,12 @@ import { CommonModule } from '@angular/common';
 import { WorkExperience } from '../../models/work-experience';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-work-experience-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule, CalendarModule],
   templateUrl: './work-experience-form.component.html',
   styleUrl: './work-experience-form.component.scss'
 })
