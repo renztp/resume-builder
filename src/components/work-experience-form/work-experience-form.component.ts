@@ -11,11 +11,12 @@ import { WorkExperience } from '../../models/work-experience';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
 import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-work-experience-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule, CalendarModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule, CalendarModule, CheckboxModule],
   templateUrl: './work-experience-form.component.html',
   styleUrl: './work-experience-form.component.scss'
 })
@@ -66,6 +67,7 @@ export class WorkExperienceFormComponent {
       occupation: [null, [Validators.required]],
       startYear: [null, [Validators.required]],
       endYear: [null],
+      present: [false],
       description: [null],
       url: [null],
       logo: [null]
@@ -78,6 +80,7 @@ export class WorkExperienceFormComponent {
       occupation: [null, [Validators.required]],
       startYear: [null, [Validators.required]],
       endYear: [null],
+      present: [false],
       description: [null],
       url: [null],
       logo: [null]
@@ -92,5 +95,14 @@ export class WorkExperienceFormComponent {
 
   removeWorkExperience(index: number) {
     this.workExperiences.removeAt(index);
+  }
+
+  togglePresent(index: number) {
+    const workExperience = this.workExperiences.at(index);
+    const present = workExperience.get('present');
+    present?.setValue(!present?.value);
+    const endYear = workExperience.get('endYear');
+    endYear?.disable();
+    console.log(present?.value);
   }
 }

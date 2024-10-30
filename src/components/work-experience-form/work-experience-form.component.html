@@ -15,14 +15,25 @@
             <label for="username">Occupation</label>
             <input pInputText id="occupation" formControlName="occupation" />
           </div>
-          <div class="e-grid">
-            <div class="e-input">
-              <label for="username">Start Year</label>
-              <p-calendar formControlName="startYear" />
+          <div class="work-experience-duration">
+            <div class="e-grid">
+              <div class="e-input mb-0">
+                <label for="username">Start Year</label>
+                <p-calendar formControlName="startYear" />
+              </div>
+              <div class="e-input mb-0">
+                <label for="username">End Year</label>
+                <input pInputText id="endYear" formControlName="endYear" [disabled]="true" />
+              </div>
             </div>
-            <div class="e-input">
-              <label for="username">End Year</label>
-              <input pInputText id="endYear" formControlName="endYear" />
+            <div>
+              <label for="present-checkbox">Present</label>
+              <p-checkbox
+                id="present-checkbox"
+                formControlName="present"
+                value="present"
+                (click)="togglePresent(i)"
+                inputId="binary" />
             </div>
           </div>
           <div class="e-input">

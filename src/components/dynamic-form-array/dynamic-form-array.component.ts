@@ -10,15 +10,17 @@ import { CommonModule } from '@angular/common';
 import { WorkExperience } from '../../models/work-experience';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-dynamic-form-array',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule, CalendarModule, CheckboxModule],
   templateUrl: './dynamic-form-array.component.html',
   styleUrl: './dynamic-form-array.component.scss'
 })
-export class DynamicFormArray {
+export class DynamicFormArrayComponent {
   @Input() workExperience: WorkExperience[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
@@ -65,6 +67,7 @@ export class DynamicFormArray {
       occupation: [null, [Validators.required]],
       startYear: [null, [Validators.required]],
       endYear: [null],
+      present: [false],
       description: [null],
       url: [null],
       logo: [null]
@@ -77,6 +80,7 @@ export class DynamicFormArray {
       occupation: [null, [Validators.required]],
       startYear: [null, [Validators.required]],
       endYear: [null],
+      present: [false],
       description: [null],
       url: [null],
       logo: [null]
@@ -91,5 +95,14 @@ export class DynamicFormArray {
 
   removeWorkExperience(index: number) {
     this.workExperiences.removeAt(index);
+  }
+
+  togglePresent(index: number) {
+    const workExperience = this.workExperiences.at(index);
+    const present = workExperience.get('present');
+    present?.setValue(!present?.value);
+    const endYear = workExperience.get('endYear');
+    endYear?.disable();
+    console.log(present?.value);
   }
 }
