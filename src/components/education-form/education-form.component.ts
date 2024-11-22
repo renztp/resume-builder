@@ -23,7 +23,6 @@ export class EducationFormComponent {
   @Input() education: Education[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
-  foo: any;
 
   constructor(
     private formBuilder: UntypedFormBuilder

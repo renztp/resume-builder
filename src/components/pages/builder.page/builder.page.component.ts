@@ -68,7 +68,7 @@ export class BuilderPageComponent {
       { label: 'Basic Info', icon: 'pi pi-home', title: 'basic-info' },
       { label: 'Work Experience', icon: 'pi pi-chart-line', title: 'work-experience' },
       { label: 'Education', icon: 'pi pi-list', title: 'education' },
-      { label: 'Misc', icon: 'pi pi-list', title: 'misc' },
+      // { label: 'Misc', icon: 'pi pi-list', title: 'misc' },
     ];
 
     this.activeItem = this.items[0];
