@@ -22,7 +22,7 @@ import { ButtonModule } from "primeng/button";
 import { CommonModule } from "@angular/common";
 import { WorkExperience } from "../../models/work-experience";
 import { debounceTime, distinctUntilChanged } from "rxjs";
-import { AccordionModule } from "primeng/accordion";
+import { AccordionModule, AccordionTabOpenEvent } from "primeng/accordion";
 import { CalendarModule } from "primeng/calendar";
 import { CheckboxModule } from "primeng/checkbox";
 import { MessageService } from "primeng/api";
@@ -49,6 +49,7 @@ import { MessageService } from "primeng/api";
 export class WorkExperienceFormComponent {
   @Input() workExperience: WorkExperience[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
+  activeIndex: number[] = [];
   formGroup: FormGroup;
   loading = true;
 
@@ -73,6 +74,10 @@ export class WorkExperienceFormComponent {
     } else {
       this.loading = false;
     }
+  }
+
+  ngOnDestroy() {
+    console.log('destroying!!');
   }
 
   private assignExistingWorkExperience(workExperience: WorkExperience[]) {
@@ -135,6 +140,24 @@ export class WorkExperienceFormComponent {
       summary: "Success",
       detail: "File Uploaded with Basic Mode",
     });
+  }
+
+  addOrRemoveActiveIndex(activeIndex: number) {
+    const index = this.activeIndex.indexOf(activeIndex);
+    if(index > -1) {
+      this.activeIndex.splice(index, 1);
+    } else {
+      this.activeIndex.push(activeIndex);
+    }
+    console.log(this.activeIndex);
+  }
+
+  onClose(event: AccordionTabOpenEvent) {
+    this.addOrRemoveActiveIndex(event.index);
+  }
+
+  onOpen(event: AccordionTabOpenEvent) {
+    this.addOrRemoveActiveIndex(event.index);
   }
 
   togglePresent(index: number) {

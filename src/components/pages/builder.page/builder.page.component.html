@@ -1,6 +1,8 @@
 <div class="app-wrapper">
-  <app-sidebar>
-    <div class="card">
+  <!-- <app-sidebar> -->
+  <!--    -->
+  <!-- </app-sidebar> -->
+<div class="card">
       <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
       <ng-container *ngIf="activeItem?.title === 'basic-info'">
         <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [basicInfo]="basicInfo"></app-basic-info-form>
@@ -12,6 +14,5 @@
         <app-education-form [education]="education" (changed)="onDataChanged($event)"></app-education-form>
       </ng-container>
     </div>
-  </app-sidebar>
-  <app-layout-previewer></app-layout-previewer>
+  <!-- <app-layout-previewer></app-layout-previewer> -->
 </div>

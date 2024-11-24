@@ -4,6 +4,11 @@
   }
 }
 
+:host ::ng-deep {
+  p-calendar, p-calendar input, p-calendar span {
+    width: 100%;
+  }
+}
 /* :host ::ng-deep { */
 /*   p-input input { */
 /*     width: 100%; */
