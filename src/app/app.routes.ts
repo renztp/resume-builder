@@ -3,11 +3,11 @@ import { SetupPageComponent } from '../components/pages/setup.page/setup.page.co
 import { AppComponent } from './app.component';
 import { BuilderPageComponent } from '../components/pages/builder.page/builder.page.component';
 import { LayoutChooserPageComponent } from '../components/pages/layout-chooser.page/layout-chooser.page.component';
-import { BasicInfoFormComponent } from '../components/basic-info-form/basic-info-form.component';
+import { BasicInfoFormComponent } from '../app/basic-info-form/basic-info-form.component';
 
 export const routes: Routes = [
   { path: '', component: SetupPageComponent },
-  { 
+  {
     path: 'builder', component: BuilderPageComponent,
     children: [
       {

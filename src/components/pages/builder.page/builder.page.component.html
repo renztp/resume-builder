@@ -1,18 +1,19 @@
 <div class="app-wrapper">
+  <app-sidemenu></app-sidemenu>
   <!-- <app-sidebar> -->
   <!--    -->
   <!-- </app-sidebar> -->
-<div class="card">
-      <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
-      <ng-container *ngIf="activeItem?.title === 'basic-info'">
-        <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [basicInfo]="basicInfo"></app-basic-info-form>
-      </ng-container>
-      <ng-container *ngIf="activeItem?.title === 'work-experience'">
-        <app-work-experience-form [workExperience]="workExperience" (changed)="onDataChanged($event)"></app-work-experience-form>
-      </ng-container>
-      <ng-container *ngIf="activeItem?.title === 'education'">
-        <app-education-form [education]="education" (changed)="onDataChanged($event)"></app-education-form>
-      </ng-container>
-    </div>
+  <div class="card">
+    <!-- <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" /> -->
+    <ng-container *ngIf="activeItem?.title === 'basic-info'">
+      <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [basicInfo]="basicInfo"></app-basic-info-form>
+    </ng-container>
+    <ng-container *ngIf="activeItem?.title === 'work-experience'">
+      <app-work-experience-form [workExperience]="workExperience" (changed)="onDataChanged($event)"></app-work-experience-form>
+    </ng-container>
+    <ng-container *ngIf="activeItem?.title === 'education'">
+      <app-education-form [education]="education" (changed)="onDataChanged($event)"></app-education-form>
+    </ng-container>
+  </div>
   <!-- <app-layout-previewer></app-layout-previewer> -->
 </div>

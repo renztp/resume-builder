@@ -149,7 +149,6 @@ export class WorkExperienceFormComponent {
     } else {
       this.activeIndex.push(activeIndex);
     }
-    console.log(this.activeIndex);
   }
 
   onClose(event: AccordionTabOpenEvent) {

@@ -2,12 +2,17 @@
   <div formGroupName="basicInfo">
     <div class="picture-wrapper">
       <h2>Picture</h2>
+      <p-image
+        src="https://primefaces.org/cdn/primeng/images/galleria/galleria10.jpg"
+        alt="Image"
+        styleClass="rounded-image"
+        width="250" />
       <div class="card flex justify-content-center">
         <p-toast />
         <!-- Change this to custom UI with cloud icon -->
         <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]"
-                      url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
-                      (onUpload)="onUpload($event)" />
+          url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
+          (onUpload)="onUpload($event)" />
       </div>
     </div>
     <div class="basic-info-wrapper">
