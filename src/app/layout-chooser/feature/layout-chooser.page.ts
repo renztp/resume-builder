@@ -8,8 +8,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
   selector: 'app-layout-chooser.page',
   standalone: true,
   imports: [RadioButtonModule, FormsModule, ButtonModule, RouterLink],
-  templateUrl: './layout-chooser.page.component.html',
-  styleUrl: './layout-chooser.page.component.scss'
+  templateUrl: './layout-chooser.page.html',
+  styleUrl: './layout-chooser.page.scss'
 })
 export class LayoutChooserPageComponent {
   layout!: string;

@@ -4,26 +4,26 @@ import { FormsModule } from '@angular/forms';
 
 import { MenuItem } from 'primeng/api';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { SidebarComponent } from '../../../app/sidebar/sidebar.component';
-import { LayoutPreviewerComponent } from '../../../app/layout-previewer/layout-previewer.component';
+import { SidebarComponent } from '../../../shared/ui/sidebar/sidebar.component';
+import { LayoutPreviewerComponent } from '../../../layout-previewer/feature/layout-previewer.component';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BasicInfoFormComponent } from "../../../app/basic-info-form/basic-info-form.component";
-import { WorkExperienceFormComponent } from '../../work-experience-form/work-experience-form.component';
-import { ResumeData } from '../../../models/resume-data';
-import { EducationFormComponent } from '../../../app/education-form/education-form.component';
-import { BasicInfo } from '../../../models/basic';
-import { WorkExperience } from '../../../models/work-experience';
-import { Education } from '../../../models/education';
-import { SidemenuComponent } from '../../../app/sidemenu/sidemenu.component';
+import { BasicInfoFormComponent } from "../basic-info-form/basic-info-form.component";
+import { WorkExperienceFormComponent } from '../work-experience-form/work-experience-form.component';
+import { ResumeData } from '../../../shared/models/resume-data';
+import { EducationFormComponent } from '../education-form/education-form.component';
+import { BasicInfo } from '../../../shared/models/basic';
+import { WorkExperience } from '../../../shared/models/work-experience';
+import { Education } from '../../../shared/models/education';
+import { SidemenuComponent } from '../../../shared/ui/sidemenu/sidemenu.component';
 
 @Component({
   selector: 'app-builder.page',
   standalone: true,
   imports: [FormsModule, CommonModule, TabMenuModule, SidebarComponent, LayoutPreviewerComponent, ButtonModule, BasicInfoFormComponent, WorkExperienceFormComponent, EducationFormComponent, SidemenuComponent],
-  templateUrl: './builder.page.component.html',
-  styleUrl: './builder.page.component.scss'
+  templateUrl: './builder.page.html',
+  styleUrl: './builder.page.scss'
 })
 export class BuilderPageComponent {
   resumeData: ResumeData;

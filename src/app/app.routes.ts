@@ -1,21 +1,19 @@
 import { Routes } from '@angular/router';
-import { SetupPageComponent } from '../components/pages/setup.page/setup.page.component';
-import { AppComponent } from './app.component';
-import { BuilderPageComponent } from '../components/pages/builder.page/builder.page.component';
-import { LayoutChooserPageComponent } from '../components/pages/layout-chooser.page/layout-chooser.page.component';
-import { BasicInfoFormComponent } from '../app/basic-info-form/basic-info-form.component';
+import { BuilderPageComponent } from './builder/feature/builder-page/builder.page';
+import { LayoutChooserPageComponent } from './layout-chooser/feature/layout-chooser.page';
 
 export const routes: Routes = [
-  { path: '', component: SetupPageComponent },
+  // { path: '', component: SetupPageComponent },
+  // { path: 'layout-chooser', component: LayoutChooserPageComponent },
+  { path: '', component: LayoutChooserPageComponent },
   {
     path: 'builder', component: BuilderPageComponent,
-    children: [
-      {
-        path: 'basic-info',
-        component: BasicInfoFormComponent
-      }
-    ]
+    // children: [
+    //   {
+    //     path: 'basic-info',
+    //     component: BasicInfoFormComponent
+    //   }
+    // ]
   },
-  { path: 'layout-chooser', component: LayoutChooserPageComponent },
   { path: '**', redirectTo: '' }
 ];

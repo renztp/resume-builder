@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import {ImageModule} from 'primeng/image'
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -9,7 +9,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { BasicInfo } from '../../models/basic';
+import { BasicInfo } from '../../../shared/models/basic';
 import { CommonModule } from '@angular/common';
 
 

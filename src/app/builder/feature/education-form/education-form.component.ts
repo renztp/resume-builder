@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ResumeData } from '../../models/resume-data';
+import { ResumeData } from '../../../shared/models/resume-data';
 import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { EditorModule } from 'primeng/editor';
@@ -9,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
-import { Education } from '../../models/education';
+import { Education } from '../../../shared/models/education';
 import { CalendarModule } from 'primeng/calendar';
 
 @Component({

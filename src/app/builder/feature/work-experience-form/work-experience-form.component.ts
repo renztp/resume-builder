@@ -6,7 +6,7 @@ import {
   SimpleChange,
   SimpleChanges,
 } from "@angular/core";
-import { ResumeData } from "../../models/resume-data";
+import { ResumeData } from "../../../shared/models/resume-data";
 import {
   FormArray,
   FormGroup,
@@ -20,7 +20,7 @@ import { FileUploadModule } from "primeng/fileupload";
 import { ToastModule } from "primeng/toast";
 import { ButtonModule } from "primeng/button";
 import { CommonModule } from "@angular/common";
-import { WorkExperience } from "../../models/work-experience";
+import { WorkExperience } from "../../../shared/models/work-experience";
 import { debounceTime, distinctUntilChanged } from "rxjs";
 import { AccordionModule, AccordionTabOpenEvent } from "primeng/accordion";
 import { CalendarModule } from "primeng/calendar";

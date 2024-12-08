@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ResumeData } from '../../models/resume-data';
+import { ResumeData } from '@shared/models/resume-data';
 
 @Component({
   selector: 'app-layout-previewer',
