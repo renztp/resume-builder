@@ -1,6 +1,7 @@
-import { Component, signal, effect } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
@@ -13,14 +14,14 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 })
 export class LayoutChooserPageComponent {
   layout!: string;
+  selectedLayout!: string | null;
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private stepWizardService: StepWizardService) {
   }
 
   changeSelectedLayout(layout: string) {
     this.layout = layout;
-    console.log('layout', this.layout);
+    this.stepWizardService.setSelectedLayout(layout);
   }
 
   navigateBuilder() {

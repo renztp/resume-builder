@@ -17,6 +17,7 @@ import { BasicInfo } from '../../../shared/models/basic';
 import { WorkExperience } from '../../../shared/models/work-experience';
 import { Education } from '../../../shared/models/education';
 import { SidemenuComponent } from '../../../shared/ui/sidemenu/sidemenu.component';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-builder.page',
@@ -35,7 +36,9 @@ export class BuilderPageComponent {
   activeItem: MenuItem | undefined;
   statez: any = {};
 
-  constructor(private router: ActivatedRoute) {
+  selectedLayout: string | null = null;
+
+  constructor(private router: ActivatedRoute, private stepWizardService: StepWizardService) {
     this.resumeData = {
       basicInfo: {
         name: '',
@@ -60,6 +63,8 @@ export class BuilderPageComponent {
     };
     this.workExperience = [];
     this.education = [];
+
+    // this.selectedLayout = this.stepWizardService.selectedLayout$().sub;
   }
 
   ngOnInit() {
@@ -72,6 +77,19 @@ export class BuilderPageComponent {
     ];
 
     this.activeItem = this.items[0];
+    this.setupResumeData();
+  }
+
+  setupResumeData() {
+    this.stepWizardService.selectedLayout$.subscribe({
+      next: (layout) => {
+        this.selectedLayout = layout;
+        console.log('layout', layout);
+      },
+      error: (error) => {
+        console.log('error', error);
+      },
+    })
   }
 
   onActiveItemChange(event: MenuItem) {
