@@ -21,10 +21,10 @@ export class LayoutChooserPageComponent {
 
   changeSelectedLayout(layout: string) {
     this.layout = layout;
-    this.stepWizardService.setSelectedLayout(layout);
+    this.stepWizardService.setSelectedLayout(this.layout);
   }
 
   navigateBuilder() {
-    this.router.navigate(['/builder', { layout: this.layout }])
+    this.router.navigate(['/builder'])
   }
 }

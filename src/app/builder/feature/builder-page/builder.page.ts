@@ -81,14 +81,8 @@ export class BuilderPageComponent {
   }
 
   setupResumeData() {
-    this.stepWizardService.selectedLayout$.subscribe({
-      next: (layout) => {
-        this.selectedLayout = layout;
-        console.log('layout', layout);
-      },
-      error: (error) => {
-        console.log('error', error);
-      },
+    this.stepWizardService.selectedLayout$.subscribe(result => {
+      console.log('result from setupResumeData');
     })
   }
 

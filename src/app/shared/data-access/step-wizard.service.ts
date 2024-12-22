@@ -14,10 +14,12 @@ enum Steps {
 export class StepWizardService {
   // selectedLayout: string | null = null;
   selectedLayout = new Subject<string>();
-  constructor() {}
+  constructor() {
+    this.selectedLayout.next('');
+  }
 
   get selectedLayout$() {
-    return this.selectedLayout.asObservable();
+    return this.selectedLayout;
   }
 
   setSelectedLayout(layout: string) {
