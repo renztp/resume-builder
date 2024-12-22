@@ -14,6 +14,12 @@
     <ng-container *ngIf="activeItem?.title === 'education'">
       <app-education-form [education]="education" (changed)="onDataChanged($event)"></app-education-form>
     </ng-container>
+    <div class="g-align-right">
+      @if (activeItem?.title !== 'basic-info') {
+        <p-button (click)="navigatePrevious()" class="mr-2">Previous</p-button>
+      }
+      <p-button (click)="navigateNext()">Next</p-button>
+    </div>
   </div>
   <!-- <app-layout-previewer></app-layout-previewer> -->
 </div>

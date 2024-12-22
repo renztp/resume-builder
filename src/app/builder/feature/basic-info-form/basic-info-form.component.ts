@@ -23,7 +23,6 @@ import { CommonModule } from '@angular/common';
 })
 export class BasicInfoFormComponent {
   @Input() basicInfo: BasicInfo = {
-    picture: '',
     name: '',
     occupation: '',
     email: '',
@@ -38,7 +37,6 @@ export class BasicInfoFormComponent {
   constructor(formBuilder: UntypedFormBuilder, private messageService: MessageService) {
     this.formGroup = formBuilder.group({
       basicInfo: formBuilder.group({
-        picture: [null, [Validators.required]],
         name: [null, [Validators.required]],
         occupation: [null, [Validators.required]],
         email: [null, [Validators.required, Validators.email]],
@@ -60,10 +58,6 @@ export class BasicInfoFormComponent {
 
   onUpload(event: any) {
       this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
-  }
-
-  navigateNext() {
-    this.next.emit();
   }
 
   private assignExistingBasicInfoToForm(basicInfoData: BasicInfo) {

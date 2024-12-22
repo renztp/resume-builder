@@ -4,5 +4,4 @@ export interface Education {
   startYear: string;
   endYear: string;
   description?: string;
-  logo?: string;
 }

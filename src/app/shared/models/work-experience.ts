@@ -5,5 +5,4 @@ export interface WorkExperience {
   endYear: string;
   description: string;
   url?: string;
-  logo?: string;
 }

@@ -48,7 +48,6 @@ export class EducationFormComponent {
       startYear: [null, [Validators.required]],
       endYear: [null],
       description: [null],
-      logo: [null]
     })
 
     this.educations.push(education);
@@ -76,7 +75,6 @@ export class EducationFormComponent {
       startYear: [null, [Validators.required]],
       endYear: [null],
       description: [null],
-      logo: [null]
     })
   }
 

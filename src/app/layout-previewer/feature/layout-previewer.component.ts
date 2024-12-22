@@ -14,7 +14,6 @@ export class LayoutPreviewerComponent {
       name: "Renz Pulvira",
       bio: "I'm a software developer based in Pampanga, Philippines",
       email: "tullaorenz@gmail.com",
-      picture: "test",
       location: "Pampanga, Philippines",
       occupation: "Software Developer",
       phoneNumber: "+639514464329"
@@ -22,7 +21,6 @@ export class LayoutPreviewerComponent {
     workExperience: [
       {
         url: "https://www.promotions.com/",
-        logo: "Test",
         startYear: "01/01/2021",
         endYear: "01/02/2021",
         occupation: "Software Developer",
@@ -43,7 +41,6 @@ export class LayoutPreviewerComponent {
           - Did a lot of school
           - Read a lot of books
         `,
-        logo: "Test",
       }
     ]
   }

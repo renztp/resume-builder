@@ -47,13 +47,11 @@ export class BuilderPageComponent {
         phoneNumber: '',
         location: '',
         bio: '',
-        picture: ''
       },
       workExperience: [],
       education: []
     };
     this.basicInfo = {
-      picture: '',
       name: '',
       occupation: '',
       email: '',
@@ -81,8 +79,8 @@ export class BuilderPageComponent {
   }
 
   setupResumeData() {
-    this.stepWizardService.selectedLayout$.subscribe(result => {
-      console.log('result from setupResumeData');
+    this.stepWizardService.layout$.subscribe(layout => {
+      this.selectedLayout = layout;
     })
   }
 
@@ -94,6 +92,13 @@ export class BuilderPageComponent {
     const currentIndex = this.items.findIndex(item => item === this.activeItem);
     if (currentIndex < this.items.length - 1) {
       this.activeItem = this.items[currentIndex + 1];
+    }
+  }
+
+  navigatePrevious() {
+    const currentIndex = this.items.findIndex(item => item === this.activeItem);
+    if (currentIndex > 0) {
+      this.activeItem = this.items[currentIndex - 1];
     }
   }
 
@@ -109,5 +114,11 @@ export class BuilderPageComponent {
     if($event.educations) {
       this.education = $event.educations;
     }
+
+    console.log({
+      basicInfo: this.basicInfo,
+      workExperience: this.workExperience,
+      education: this.education
+    })
   }
 }

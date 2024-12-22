@@ -76,10 +76,6 @@ export class WorkExperienceFormComponent {
     }
   }
 
-  ngOnDestroy() {
-    console.log('destroying!!');
-  }
-
   private assignExistingWorkExperience(workExperience: WorkExperience[]) {
     const workExperienceArray = this.formGroup.get(
       "workExperiences",
@@ -107,7 +103,6 @@ export class WorkExperienceFormComponent {
       present: [null],
       description: [null],
       url: [null],
-      logo: [null],
     });
   }
 
@@ -120,7 +115,6 @@ export class WorkExperienceFormComponent {
       present: [null],
       description: [null],
       url: [null],
-      logo: [null],
     });
 
     this.workExperiences.push(workExperience);

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 enum Steps {
   BasicInfo = 0,
@@ -13,24 +13,13 @@ enum Steps {
 })
 export class StepWizardService {
   // selectedLayout: string | null = null;
-  selectedLayout = new Subject<string>();
-  constructor() {
-    this.selectedLayout.next('');
-  }
+  private selectedLayout = new BehaviorSubject<string | null>(null);
+  layout$ = this.selectedLayout.asObservable();
 
-  get selectedLayout$() {
-    return this.selectedLayout;
+  constructor() {
   }
 
   setSelectedLayout(layout: string) {
     this.selectedLayout.next(layout);
   }
-
-  // public getSelectedLayout() {
-  //   return this.selectedLayout;
-  // }
-  //
-  // public setSelectedLayout(layout: string) {
-  //   this.selectedLayout = layout;
-  // }
 }

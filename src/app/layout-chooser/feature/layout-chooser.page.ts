@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
@@ -15,6 +16,21 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 export class LayoutChooserPageComponent {
   layout!: string;
   selectedLayout!: string | null;
+
+  allLayouts = [
+    {
+      value: 'minimal',
+      imageUrl: '../../../assets/images/layout-1.png'
+    },
+    {
+      value: 'linear',
+      imageUrl: '../../../assets/images/layout-2.png'
+    },
+    {
+      value: 'detailed',
+      imageUrl: '../../../assets/images/layout-3.png'
+    }
+  ]
 
   constructor(private router: Router, private stepWizardService: StepWizardService) {
   }

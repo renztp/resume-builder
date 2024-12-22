@@ -1,29 +1,15 @@
 <h1>Choose Your Resume Layout</h1>
 
 <div class="layouts">
-  <div class="flex-1" (click)="changeSelectedLayout('minimal')">
-    <img src="../../../assets/images/layout-1.png" alt="">
-    <p-radioButton name="layout-item" value="minimal" [(ngModel)]="layout" inputId="layout1" />
-    <label for="layout1" class="ml-2">
-     minimal
-    </label>
-  </div>
-
-  <div class="flex-1" (click)="changeSelectedLayout('linear')">
-    <img src="../../../assets/images/layout-2.png" alt="">
-    <p-radioButton name="layout-item" value="linear" [(ngModel)]="layout" inputId="layout2" />
-    <label for="layout2" class="ml-2">
-     linear
-    </label>
-  </div>
-
-  <div class="flex-1" (click)="changeSelectedLayout('detailed')">
-    <img src="../../../assets/images/layout-3.png" alt="">
-    <p-radioButton name="layout-item" value="detailed" [(ngModel)]="layout" inputId="layout3" />
-    <label for="layout3" class="ml-2">
-     detailed
-    </label>
-  </div>
+  @for (item of allLayouts; track item.value) {
+    <div class="flex-1" (click)="changeSelectedLayout(item.value)">
+      <img [src]="item.imageUrl" alt="">
+      <p-radioButton name="layout-item" [value]="item.value" [(ngModel)]="layout" [inputId]="item.value" />
+      <label [for]="item.value" class="ml-2">
+        {{ item.value }}
+      </label>
+    </div>
+  }
 </div>
 
 <div class="button-next">

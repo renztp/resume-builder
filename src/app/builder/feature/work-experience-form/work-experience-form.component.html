@@ -7,16 +7,6 @@
         <p-accordionTab [header]="workExperiences.controls[i].value.companyName || 'Work Experience ' + (i+1)"
                         class="accordion-item" *ngFor="let workExperience of workExperiences.controls;let i=index"
                         [formGroupName]="i">
-          <div class="logo-wrapper">
-            <label for="username">Company Logo</label>
-            <div class="card flex justify-content-center">
-              <p-toast />
-              <!-- Change this to custom UI with cloud icon -->
-              <p-fileUpload mode="basic" name="logo" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]"
-                url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
-                (onUpload)="onUpload($event)" />
-            </div>
-          </div>
           <div class="e-input">
             <label for="username">Company Name</label>
             <input pInputText id="companyName" formControlName="companyName" />
