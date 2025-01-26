@@ -10,16 +10,45 @@
     /* max-width: 55vw; */
 
     .card {
-      background: #243240;
-      padding: 10px 30px 30px 30px;
-      /* border: 1px solid #555; */
-      /* border-radius: 8px; */
+      /* background: #243240; */
+      position: relative;
+      margin: 15px;
+      /* padding: 10px 30px 30px 30px; */
+      border: 1px solid #ccc;
+      border-radius: 14px;
+      background: white;
+      box-shadow: 0 2px #e6e4e4;
       /* min-width: 53vw; */
     }
 
     .mr-2 {
       margin-right: 8px;
     }
+
+    .menu-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .steps-wrapper {
+      padding: 0 17px;
+    }
+
+    .buttons-wrapper {
+      position: absolute;
+      padding: 17px;
+      bottom: 0;
+      /* bottom: 20px; */
+      left: 0;
+      width: 100%;
+      border-top: 2px solid #f0f0f0;
+    }
+  }
+
+  .pi-cog {
+    cursor: pointer;
+    color: #6b6f75;
   }
 
   /* .app-wrapper { */
@@ -33,4 +62,25 @@
     /* margin: 0 auto; */
     /* max-width: 70vw; */
   /* } */
+}
+
+:host ::ng-deep {
+  .app-wrapper p-tabmenu a[role="menuitem"] {
+    padding: 15px;
+  }
+
+  .app-wrapper .menu-wrapper{
+    position: relative;
+    padding: 0px 15px;
+
+    &:after {
+      position: absolute;
+      content: '';
+      height: 2px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      background: #f0f0f0;
+    }
+  }
 }

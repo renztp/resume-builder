@@ -40,8 +40,8 @@ export class BasicInfoFormComponent {
       basicInfo: formBuilder.group({
         name: [null, [Validators.required]],
         occupation: [null, [Validators.required]],
-        email: [null, [Validators.required, Validators.email]],
-        phoneNumber: [null, [Validators.required]],
+        email: [null],
+        phoneNumber: [null],
         location: [null, [Validators.required]],
         bio: [null, [Validators.required]],
       })

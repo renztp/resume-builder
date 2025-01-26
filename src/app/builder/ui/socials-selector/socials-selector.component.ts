@@ -15,7 +15,7 @@ export class SocialsSelectorComponent implements OnInit, OnChanges {
   availSocials = socials;
   treeData: TreeNode[] = [];
   selectedSocials: TreeNode[] = [];
-  @Output() selected = new EventEmitter();
+  @Output() toggled = new EventEmitter();
 
   constructor() {
   }
@@ -30,10 +30,13 @@ export class SocialsSelectorComponent implements OnInit, OnChanges {
   }
 
   onNodeSelect(event: any) {
-    if(this.selectedSocials.length > 0) {
       const selectedSocialsLabels = this.selectedSocials.map((node) => node.label);
-      this.selected.emit(selectedSocialsLabels);
-    }
+      this.toggled.emit(selectedSocialsLabels || []);
+  }
+
+  onNodeUnselect(event: any) {
+      const selectedSocialsLabels = this.selectedSocials.map((node) => node.label);
+      this.toggled.emit(selectedSocialsLabels || []);
   }
 
   buildSocialsTree() {
