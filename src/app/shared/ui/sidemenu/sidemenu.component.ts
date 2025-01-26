@@ -22,6 +22,9 @@ export class SidemenuComponent {
             label: "Basic Information",
           },
           {
+            label: "Contact Information",
+          },
+          {
             label: "Work Experience",
             command: () => {
             }
@@ -31,17 +34,17 @@ export class SidemenuComponent {
           }
         ]
       },
-      {
-        label: "Misc",
-        items: [
-          {
-            label: "Skills"
-          },
-          {
-            label: "Interests"
-          }
-        ]
-      }
+      // {
+      //   label: "Misc",
+      //   items: [
+      //     {
+      //       label: "Skills"
+      //     },
+      //     {
+      //       label: "Interests"
+      //     }
+      //   ]
+      // }
     ]
   }
 }

@@ -11,12 +11,13 @@ import { ToastModule } from 'primeng/toast';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { BasicInfo } from '../../../shared/models/basic';
 import { CommonModule } from '@angular/common';
+import { SocialsSelectorComponent } from '../../ui/socials-selector/socials-selector.component';
 
 
 @Component({
   selector: 'app-basic-info-form',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, CommonModule, ImageModule],
+  imports: [ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, CommonModule, ImageModule, SocialsSelectorComponent],
   providers: [MessageService, HttpClient],
   templateUrl: './basic-info-form.component.html',
   styleUrl: './basic-info-form.component.scss'

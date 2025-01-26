@@ -1,12 +1,15 @@
 <div class="app-wrapper">
-  <app-sidemenu></app-sidemenu>
+  <!-- <app-sidemenu></app-sidemenu> -->
   <!-- <app-sidebar> -->
   <!--    -->
   <!-- </app-sidebar> -->
   <div class="card">
-    <!-- <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" /> -->
+    <p-tabMenu [model]="items" [activeItem]="activeItem" (activeItemChange)="onActiveItemChange($event)" />
     <ng-container *ngIf="activeItem?.title === 'basic-info'">
       <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [basicInfo]="basicInfo"></app-basic-info-form>
+    </ng-container>
+    <ng-container *ngIf="activeItem?.title === 'contact-info'">
+      <app-contact-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" />
     </ng-container>
     <ng-container *ngIf="activeItem?.title === 'work-experience'">
       <app-work-experience-form [workExperience]="workExperience" (changed)="onDataChanged($event)"></app-work-experience-form>
@@ -20,6 +23,9 @@
       }
       <p-button (click)="navigateNext()">Next</p-button>
     </div>
+  </div>
+  <div>
+    <h1>Previewer</h1>
   </div>
   <!-- <app-layout-previewer></app-layout-previewer> -->
 </div>

@@ -5,6 +5,12 @@
 @import "../node_modules/quill/dist/quill.snow.css";
 
 // Global styles
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .g-align-right {
   text-align: right;
 }

@@ -18,11 +18,12 @@ import { WorkExperience } from '../../../shared/models/work-experience';
 import { Education } from '../../../shared/models/education';
 import { SidemenuComponent } from '../../../shared/ui/sidemenu/sidemenu.component';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
+import { ContactInfoFormComponent } from '../contact-info-form/contact-info-form.component';
 
 @Component({
   selector: 'app-builder.page',
   standalone: true,
-  imports: [FormsModule, CommonModule, TabMenuModule, SidebarComponent, LayoutPreviewerComponent, ButtonModule, BasicInfoFormComponent, WorkExperienceFormComponent, EducationFormComponent, SidemenuComponent],
+  imports: [FormsModule, CommonModule, TabMenuModule, SidebarComponent, LayoutPreviewerComponent, ButtonModule, BasicInfoFormComponent, WorkExperienceFormComponent, EducationFormComponent, SidemenuComponent, ContactInfoFormComponent],
   templateUrl: './builder.page.html',
   styleUrl: './builder.page.scss'
 })
@@ -69,6 +70,7 @@ export class BuilderPageComponent {
     this.statez = this.router.snapshot?.params;
     this.items = [
       { label: 'Basic Info', icon: 'pi pi-home', title: 'basic-info' },
+      { label: 'Contact Info', icon: 'pi pi-phone', title: 'contact-info' },
       { label: 'Work Experience', icon: 'pi pi-chart-line', title: 'work-experience' },
       { label: 'Education', icon: 'pi pi-list', title: 'education' },
       // { label: 'Misc', icon: 'pi pi-list', title: 'misc' },

@@ -1,0 +1,11 @@
+:host {
+  p-tree {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+
+  ::ng-deep .p-tree .p-tree-container {
+    height: 250px;
+    overflow-y: scroll;
+  }
+}

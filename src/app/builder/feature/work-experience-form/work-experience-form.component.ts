@@ -16,7 +16,6 @@ import {
 } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { EditorModule } from "primeng/editor";
-import { FileUploadModule } from "primeng/fileupload";
 import { ToastModule } from "primeng/toast";
 import { ButtonModule } from "primeng/button";
 import { CommonModule } from "@angular/common";
@@ -35,7 +34,6 @@ import { MessageService } from "primeng/api";
     ReactiveFormsModule,
     InputTextModule,
     EditorModule,
-    FileUploadModule,
     ToastModule,
     ButtonModule,
     AccordionModule,
@@ -126,14 +124,6 @@ export class WorkExperienceFormComponent {
 
   removeWorkExperience(index: number) {
     this.workExperiences.removeAt(index);
-  }
-
-  onUpload(event: any) {
-    this.messageService.add({
-      severity: "info",
-      summary: "Success",
-      detail: "File Uploaded with Basic Mode",
-    });
   }
 
   addOrRemoveActiveIndex(activeIndex: number) {

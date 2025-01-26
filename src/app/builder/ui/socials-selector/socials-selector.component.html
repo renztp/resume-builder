@@ -1,0 +1,6 @@
+<div class="card" *ngIf="treeData">
+  <p-tree [value]="treeData" filter="true" selectionMode="checkbox" [(selection)]="selectedSocials" (onNodeSelect)="onNodeSelect($event)" />
+  <div>
+    {{ selectedSocials | json }}
+  </div>
+</div>
