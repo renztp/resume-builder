@@ -1,5 +1,16 @@
 <h2>Contact Info</h2>
-<app-socials-selector (toggled)="onSocialsToggled($event)" />
-<div>
-  {{ selectedSocials | json }}
-</div>
+@if (phase === 0) {
+  <app-socials-selector (toggled)="onSocialsToggled($event)" />
+}
+@else {
+  <div>
+    {{ selectedSocials | json }}
+  </div>
+}
+
+<!-- <form [formGroup]="formGroup"></form> -->
+<!-- @if (selectedSocials && selectedSocials.length > 0) { -->
+<!--   <div> -->
+<!--     {{ selectedSocials | json }} -->
+<!--   </div> -->
+<!-- } -->

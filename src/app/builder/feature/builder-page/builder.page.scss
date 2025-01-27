@@ -36,13 +36,15 @@
     }
 
     .buttons-wrapper {
+      background: white;
       position: absolute;
       padding: 17px;
       bottom: 0;
-      /* bottom: 20px; */
       left: 0;
       width: 100%;
       border-top: 2px solid #f0f0f0;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
     }
   }
 
