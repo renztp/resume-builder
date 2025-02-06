@@ -1,4 +1,3 @@
 <div class="card" *ngIf="treeData">
   <p-tree [value]="treeData" filter="true" selectionMode="checkbox" [(selection)]="selectedSocials" (onNodeSelect)="onNodeSelect($event)" (onNodeUnselect)="onNodeUnselect($event)" />
-
 </div>

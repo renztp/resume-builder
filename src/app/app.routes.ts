@@ -6,7 +6,7 @@ import { UploaderPageComponent } from './uploader/feature/uploader.page';
 
 export const routes: Routes = [
   // { path: '', component: SetupPageComponent },
-  // { path: 'layout-chooser', component: LayoutChooserPageComponent },
+  { path: 'layout-chooser', component: LayoutChooserPageComponent },
   // { path: '', component: LayoutChooserPageComponent },
   { path: '', component: UploaderPageComponent },
   {

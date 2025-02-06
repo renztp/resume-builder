@@ -1,0 +1,25 @@
+:host {
+  .form-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .no-links-msg {
+    text-align: center;
+  }
+
+  .no-links-msg span {
+    color: blue;
+  }
+
+  .no-links-msg span {
+    cursor: pointer;
+  }
+
+  .social-selector-buttons {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+  }
+}

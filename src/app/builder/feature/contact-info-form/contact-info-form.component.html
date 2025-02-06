@@ -1,16 +1,30 @@
-<h2>Contact Info</h2>
-@if (phase === 0) {
-  <app-socials-selector (toggled)="onSocialsToggled($event)" />
+<div class="form-header">
+  <h2>Contact Info</h2>
+  <p-button icon="pi pi-address-book" label="Edit" size="small" (click)="socialLinksVisible = true"></p-button>
+</div>
+@if (!socialLinksVisible) {
+  <p class="no-links-msg">No social links selected yet,<br>
+    <span (click)="socialLinksVisible = true">Please Add select social links.</span>
+  </p>
 }
-@else {
-  <div>
-    {{ selectedSocials | json }}
-  </div>
+@if (formGroup.controls['contacts'].value.length > 0) {
+  <form [formGroup]="formGroup">
+    <ng-container formArrayName="contacts">
+      <ng-container *ngFor="let contact of contacts.controls;let i=index" [formGroupName]="i">
+        <p-inputGroup *ngIf="!contacts.controls[i].value.disabled">
+          <button type="button" pButton>{{ contacts.controls[i].value.name }}</button>
+          <input type="text" pInputText placeholder="http://" formControlName="value" />
+        </p-inputGroup>
+      </ng-container>
+    </ng-container>
+  </form>
 }
 
-<!-- <form [formGroup]="formGroup"></form> -->
-<!-- @if (selectedSocials && selectedSocials.length > 0) { -->
-<!--   <div> -->
-<!--     {{ selectedSocials | json }} -->
-<!--   </div> -->
-<!-- } -->
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="socialLinksVisible" [style]="{ width: '25rem' }">
+  <app-socials-selector [existingSelectedSocials]="selectedSocials" (onNodeSelected)="onSocialsAdded($event)" (onNodeUnselected)="disableControl($event)" />
+  <br>
+  <div class="social-selector-buttons">
+    <p-button label="Cancel" severity="secondary" (click)="socialLinksVisible = false" />
+    <p-button label="Save" (click)="socialLinksVisible = false" />
+  </div>
+</p-dialog>

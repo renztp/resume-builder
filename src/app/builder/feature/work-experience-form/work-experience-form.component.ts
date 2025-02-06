@@ -3,8 +3,6 @@ import {
   EventEmitter,
   Input,
   Output,
-  SimpleChange,
-  SimpleChanges,
 } from "@angular/core";
 import { ResumeData } from "../../../shared/models/resume-data";
 import {

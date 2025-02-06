@@ -12,13 +12,9 @@ export class UploaderPageComponent {
     console.log('event', event);
     const file = event.target.files[0];
     const fileReader = new FileReader();
-    console.log({
-      file, fileReader
-    })
     fileReader.onload = (e) => {
       const jsonObject = JSON.parse(fileReader.result as string);
       console.log('jsonObject', jsonObject);
-      console.log('dependencies', jsonObject.dependencies);
     }
 
     fileReader.readAsText(file);

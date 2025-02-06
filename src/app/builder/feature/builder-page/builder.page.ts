@@ -35,7 +35,6 @@ export class BuilderPageComponent {
   items: MenuItem[] = [];
 
   activeItem: MenuItem | undefined;
-  statez: any = {};
 
   selectedLayout: string | null = null;
 
@@ -67,7 +66,6 @@ export class BuilderPageComponent {
   }
 
   ngOnInit() {
-    this.statez = this.router.snapshot?.params;
     this.items = [
       { label: 'Basic Info', icon: 'pi pi-home', title: 'basic-info' },
       { label: 'Contact Info', icon: 'pi pi-phone', title: 'contact-info' },
