@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { BuilderPageComponent } from './builder/feature/builder-page/builder.page';
 import { LayoutChooserPageComponent } from './layout-chooser/feature/layout-chooser.page';
-import { PreviewPageComponent } from './builder/feature/preview-page/preview.page';
 import { SetupPageComponent } from './setup/setup.page.component';
 
 export const routes: Routes = [
@@ -17,10 +16,6 @@ export const routes: Routes = [
     //     component: BasicInfoFormComponent
     //   }
     // ]
-  },
-  {
-    path: 'preview',
-    component: PreviewPageComponent
   },
   { path: '**', redirectTo: '' }
 ];

@@ -1,4 +1,7 @@
 :host {
+  p-card {
+    text-align: center;
+  }
   .wrapper {
     width: 100%;
     max-width: 550px;
@@ -12,12 +15,23 @@
   }
 
   .button-wrapper {
+    margin-top: 0;
+    padding: 0;
     text-align: center;
   }
+
 }
 
 :host ::ng-deep {
   .button-wrapper p-button button {
     margin-bottom: 8px;
+  }
+
+  .p-card-title {
+    margin-top: 8px;
+  }
+
+  .p-card-content {
+    padding-bottom: 0;
   }
 }
