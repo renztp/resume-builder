@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output } from "@angular/core";
 import { SocialsSelectorComponent } from "../../ui/socials-selector/socials-selector.component";
 import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormArray, UntypedFormBuilder } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -7,6 +7,8 @@ import { DialogModule } from "primeng/dialog";
 import { ContactsFormComponent } from "../../ui/contacts-form/contacts-form.component";
 import { Socials } from "@shared/models/socials";
 import { InputGroupModule } from "primeng/inputgroup";
+import { StepWizardService } from "@shared/data-access/step-wizard.service";
+import { debounceTime, distinctUntilChanged } from "rxjs";
 
 enum ContactInfoPhases {
   SocialsSelectionPhase = 0,
@@ -20,22 +22,48 @@ enum ContactInfoPhases {
   templateUrl: './contact-info-form.component.html',
   styleUrl: './contact-info-form.component.scss'
 })
-export class ContactInfoFormComponent {
+export class ContactInfoFormComponent implements OnChanges {
+  @Input() contactInfo: Socials[] = [];
   @Output() next = new EventEmitter<void>();
   @Output() changed = new EventEmitter<FormGroup>();
   selectedSocials: Socials[] = [];
   formGroup: FormGroup;
   phase: ContactInfoPhases;
   socialLinksVisible = false;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
+    private stepWizardService: StepWizardService,
     private cdr: ChangeDetectorRef
   ) {
     this.phase = ContactInfoPhases.SocialsSelectionPhase;
     this.formGroup = this.formBuilder.group({
       contacts: this.formBuilder.array([]),
     })
+
+    this.contacts.push(this.formBuilder.group({
+      name: 'Email',
+      value: '',
+      disabled: false,
+    }));
+
+    this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => {
+      this.changed.emit(value);
+      const { contacts } = value;
+      this.stepWizardService.updateResumeData('contactInfo', contacts)
+    });
+
+    this.stepWizardService.contactInfoForm$.subscribe({
+      next: value => {
+        this.loading = true;
+        // this.cdr.detectChanges();
+        this.loading = false;
+      }
+    })
+  }
+
+  ngOnChanges() {
   }
 
   computeSocialContacts(socials: Socials[]) {

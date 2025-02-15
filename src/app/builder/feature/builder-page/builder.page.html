@@ -14,7 +14,7 @@
         <app-basic-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [basicInfo]="basicInfo"></app-basic-info-form>
       </ng-container>
       <ng-container *ngIf="activeItem?.title === 'contact-info'">
-        <app-contact-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" />
+        <app-contact-info-form (next)="navigateNext()" (changed)="onDataChanged($event)" [contactInfo]="contactInfo" />
       </ng-container>
       <ng-container *ngIf="activeItem?.title === 'work-experience'">
         <app-work-experience-form [workExperience]="workExperience" (changed)="onDataChanged($event)"></app-work-experience-form>
@@ -30,9 +30,5 @@
       <p-button (click)="navigateNext()">Next</p-button>
     </div>
   </div>
-  <div>
-    <h1>Previewer</h1>
-    <p-button>Download PDF</p-button>
-  </div>
-  <!-- <app-layout-previewer></app-layout-previewer> -->
+  <app-layout-previewer></app-layout-previewer>
 </div>

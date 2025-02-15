@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ResumeData } from '../../../shared/models/resume-data';
 import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { EditorModule } from 'primeng/editor';
@@ -11,6 +10,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { AccordionModule } from 'primeng/accordion';
 import { Education } from '../../../shared/models/education';
 import { CalendarModule } from 'primeng/calendar';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-education-form',
@@ -25,13 +25,18 @@ export class EducationFormComponent {
   formGroup: FormGroup;
 
   constructor(
-    private formBuilder: UntypedFormBuilder
+    private formBuilder: UntypedFormBuilder,
+    private stepWizardService: StepWizardService
   ) {
     this.formGroup = this.formBuilder.group({
       educations: this.formBuilder.array([]),
     })
 
-    this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => this.changed.emit(value));
+    this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => {
+      this.changed.emit(value);
+      const { educations } = value;
+      this.stepWizardService.updateResumeData('education', educations)
+    });
   }
 
   ngOnInit() {

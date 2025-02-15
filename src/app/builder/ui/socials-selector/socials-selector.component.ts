@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
 import socials from "@assets/socials.json"
+import { StepWizardService } from "@shared/data-access/step-wizard.service";
 import { Socials } from "@shared/models/socials";
 import { TreeNode } from "primeng/api";
 import { ButtonModule } from "primeng/button";
@@ -21,7 +22,7 @@ export class SocialsSelectorComponent implements OnInit {
   @Output() onNodeSelected = new EventEmitter<Socials>();
   @Output() onNodeUnselected = new EventEmitter<string>();
 
-  constructor() {
+  constructor(private stepWizardService: StepWizardService) {
   }
 
   ngOnInit() {
@@ -41,10 +42,13 @@ export class SocialsSelectorComponent implements OnInit {
       value: '',
       disabled: false
     });
+    this.stepWizardService.updateContactInfoForm(this.selectedSocials);
   }
 
   onNodeUnselect(event: any) {
     this.onNodeUnselected.emit(event.node.label)
+
+    this.stepWizardService.updateContactInfoForm(this.selectedSocials)
   }
 
   buildSocialsTree(existingSelectedSocials?: string[]) {

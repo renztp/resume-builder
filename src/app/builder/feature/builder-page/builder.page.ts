@@ -19,6 +19,7 @@ import { Education } from '../../../shared/models/education';
 import { SidemenuComponent } from '../../../shared/ui/sidemenu/sidemenu.component';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { ContactInfoFormComponent } from '../contact-info-form/contact-info-form.component';
+import { Socials } from '@shared/models/socials';
 
 @Component({
   selector: 'app-builder.page',
@@ -31,6 +32,7 @@ export class BuilderPageComponent {
   resumeData: ResumeData;
   basicInfo: BasicInfo;
   workExperience: WorkExperience[] = [];
+  contactInfo: Socials[] = [];
   education: Education[] = [];
   items: MenuItem[] = [];
 
@@ -48,6 +50,7 @@ export class BuilderPageComponent {
         location: '',
         bio: '',
       },
+      contactInfo: [],
       workExperience: [],
       education: []
     };
@@ -59,10 +62,19 @@ export class BuilderPageComponent {
       location: '',
       bio: ''
     };
+    this.contactInfo = [];
     this.workExperience = [];
     this.education = [];
 
-    // this.selectedLayout = this.stepWizardService.selectedLayout$().sub;
+    this.stepWizardService.resumeData$.subscribe({
+      next: (data) => {
+        this.resumeData = data;
+        this.basicInfo = data.basicInfo;
+        this.contactInfo = data.contactInfo;
+        this.workExperience = data.workExperience;
+        this.education = data.education;
+      }
+    })
   }
 
   ngOnInit() {

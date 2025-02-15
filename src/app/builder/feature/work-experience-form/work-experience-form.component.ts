@@ -23,6 +23,7 @@ import { AccordionModule, AccordionTabOpenEvent } from "primeng/accordion";
 import { CalendarModule } from "primeng/calendar";
 import { CheckboxModule } from "primeng/checkbox";
 import { MessageService } from "primeng/api";
+import { StepWizardService } from "@shared/data-access/step-wizard.service";
 
 @Component({
   selector: "app-work-experience-form",
@@ -52,6 +53,7 @@ export class WorkExperienceFormComponent {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private messageService: MessageService,
+    private stepWizardService: StepWizardService
   ) {
     this.formGroup = this.formBuilder.group({
       workExperiences: this.formBuilder.array([]),
@@ -60,7 +62,11 @@ export class WorkExperienceFormComponent {
     this.formGroup.valueChanges
       .pipe(debounceTime(500))
       .pipe(distinctUntilChanged())
-      .subscribe((value) => this.changed.emit(value));
+      .subscribe((value) => {
+        this.changed.emit(value);
+        const { workExperiences } = value;
+        this.stepWizardService.updateResumeData('workExperience', workExperiences)
+      });
   }
 
   ngOnInit() {
