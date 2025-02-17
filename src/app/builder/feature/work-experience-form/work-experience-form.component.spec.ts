@@ -1,23 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { render, screen, fireEvent, aliasedInput } from '@testing-library/angular';
 import { WorkExperienceFormComponent } from './work-experience-form.component';
 
 describe('WorkExperienceFormComponent', () => {
-  let component: WorkExperienceFormComponent;
-  let fixture: ComponentFixture<WorkExperienceFormComponent>;
+  it('should render the work experience form', async () => {
+    await render(WorkExperienceFormComponent, {
+      inputs: {
+        workExperience: [],
+      }
+    });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [WorkExperienceFormComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(WorkExperienceFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(screen.getByText('Work Experience')).toBeTruthy();
   });
 });

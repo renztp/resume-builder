@@ -4,14 +4,17 @@ import { ResumeData } from "@shared/models/resume-data";
 import { Socials } from "@shared/models/socials";
 import { WorkExperience } from "@shared/models/work-experience";
 import { Content, ContentStack, TDocumentDefinitions } from "pdfmake/interfaces";
+import { formatDateToYear } from "@shared/utils/date/date.util";
 
 const processWorkExperience = (workExperiences: WorkExperience[]): any => {
   const workExperiencesContent = [];
   for (const workExperienceItem of workExperiences) {
+    const formattedStartYear = workExperienceItem.startYear ? formatDateToYear(workExperienceItem.startYear) : '';
+    const formattedEndYear = workExperienceItem.endYear ? formatDateToYear(workExperienceItem.endYear) : 'Present';
     const item = [
       {
-        ...(workExperienceItem.startYear ? {
-          text: `${workExperienceItem.startYear} - ${workExperienceItem.endYear ? workExperienceItem.endYear : 'Present'}`,
+        ...(formattedStartYear ? {
+          text: `${formattedStartYear} - ${formattedStartYear ? formattedEndYear : 'Present'}`,
           italics: true,
         } : {})
       },
@@ -45,7 +48,7 @@ const processEducation = (education: Education[]): any => {
     const item = [
       {
         ...(educationItem.startYear ? {
-          text: `${educationItem.startYear} - ${educationItem.endYear ? educationItem.endYear : 'Present'}`,
+          text: `${educationItem.startYear} - ${new Date(educationItem.endYear).getFullYear().toString() ? new Date(educationItem.endYear).getFullYear().toString() : 'Present'}`,
           italics: true,
         } : {})
       },

@@ -2,7 +2,17 @@
   <p-card header="Choose how to save your resume">
     <p class="" class="button-wrapper">
       <p-button label="Create from scratch" routerLink="/layout-chooser"></p-button><br/>
-      <p-button label="Upload JSON File"></p-button>
+      <p-fileUpload
+        mode="basic"
+        chooseLabel="Upload JSON File"
+        chooseIcon="pi pi-upload"
+        customUpload="true"
+        name="demo[]"
+        [auto]="true"
+        accept="application/json"
+        maxFileSize="1000000"
+        (uploadHandler)="onUpload($event)"
+      />
     </p>
     <p>This project is still work in progress. Expect bugs.</p>
   </p-card>
