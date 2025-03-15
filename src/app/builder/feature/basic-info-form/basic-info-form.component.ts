@@ -15,20 +15,16 @@ import { SocialsSelectorComponent } from '../../ui/socials-selector/socials-sele
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
+// test
 @Component({
   selector: 'app-basic-info-form',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    InputTextModule,
-    EditorModule,
-    FileUploadModule,
-    ToastModule,
+    ReactiveFormsModule,InputTextModule,EditorModule,
+    FileUploadModule,ToastModule,
     ButtonModule,
     CommonModule,
-    ImageModule,
-    SocialsSelectorComponent,
-    InputTextareaModule,
+    ImageModule,SocialsSelectorComponent,InputTextareaModule,
   ],
   providers: [MessageService, HttpClient],
   templateUrl: './basic-info-form.component.html',
