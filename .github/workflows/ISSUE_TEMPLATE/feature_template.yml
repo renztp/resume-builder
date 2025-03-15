@@ -1,0 +1,38 @@
+name: Feature Template
+description: Describe the feature
+title: "[Feature_NAME]:"
+labels: ["new_feature", "improvement", "bug"]
+projects: ["renztp/resume-builder"]
+assignees:
+  - renztp
+body:
+  - type: input
+    id: story-points
+    attributes:
+      label: Story Points
+      placeholder: points
+    validations:
+      required: true
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Info
+      value: |
+        **Description**
+
+
+        **Acceptance Criteria**
+
+
+        **Risks**
+
+
+    validations:
+      required: true
+  - type: input
+    id: area-changes
+    attributes:
+      label: Area for changes
+      placeholder: Frontend
+    validations:
+      required: false
