@@ -25,8 +25,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 // use for info phase state
 enum ContactInfoPhases {
-  SocialsSelectionPhase = 0,
-  ContactInfoFormPhase = 1,
+  SocialsSelectionPhase = 0,ContactInfoFormPhase = 1,
 }
 
 @Component({
