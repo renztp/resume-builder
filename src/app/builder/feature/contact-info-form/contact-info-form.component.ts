@@ -23,6 +23,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
+// use for info phase state
 enum ContactInfoPhases {
   SocialsSelectionPhase = 0,
   ContactInfoFormPhase = 1,
@@ -32,13 +33,10 @@ enum ContactInfoPhases {
   selector: 'app-contact-info-form',
   standalone: true,
   imports: [
-    SocialsSelectorComponent,
-    ContactsFormComponent,
-    CommonModule,
-    ReactiveFormsModule,
+    SocialsSelectorComponent,ContactsFormComponent,
+    CommonModule,ReactiveFormsModule,
     ButtonModule,
-    DialogModule,
-    InputGroupModule,
+    DialogModule,InputGroupModule,
   ],
   templateUrl: './contact-info-form.component.html',
   styleUrl: './contact-info-form.component.scss',

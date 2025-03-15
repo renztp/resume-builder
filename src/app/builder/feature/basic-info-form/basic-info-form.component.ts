@@ -15,7 +15,6 @@ import { SocialsSelectorComponent } from '../../ui/socials-selector/socials-sele
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
-// test
 @Component({
   selector: 'app-basic-info-form',
   standalone: true,
