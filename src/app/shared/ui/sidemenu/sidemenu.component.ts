@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { MenuModule } from 'primeng/menu'
+import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-sidemenu',
   standalone: true,
   imports: [MenuModule],
   templateUrl: './sidemenu.component.html',
-  styleUrl: './sidemenu.component.scss'
+  styleUrl: './sidemenu.component.scss',
 })
 export class SidemenuComponent {
   items: MenuItem[] | undefined;
@@ -16,23 +16,22 @@ export class SidemenuComponent {
   ngOnInit() {
     this.items = [
       {
-        label: "Main",
+        label: 'Main',
         items: [
           {
-            label: "Basic Information",
+            label: 'Basic Information',
           },
           {
-            label: "Contact Information",
+            label: 'Contact Information',
           },
           {
-            label: "Work Experience",
-            command: () => {
-            }
+            label: 'Work Experience',
+            command: () => {},
           },
           {
-            label: "Education"
-          }
-        ]
+            label: 'Education',
+          },
+        ],
       },
       // {
       //   label: "Misc",
@@ -45,6 +44,6 @@ export class SidemenuComponent {
       //     }
       //   ]
       // }
-    ]
+    ];
   }
 }

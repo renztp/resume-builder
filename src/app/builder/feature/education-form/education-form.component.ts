@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormArray, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -15,9 +21,19 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
 @Component({
   selector: 'app-education-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, AccordionModule, CalendarModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    EditorModule,
+    FileUploadModule,
+    ToastModule,
+    ButtonModule,
+    AccordionModule,
+    CalendarModule,
+  ],
   templateUrl: './education-form.component.html',
-  styleUrl: './education-form.component.scss'
+  styleUrl: './education-form.component.scss',
 })
 export class EducationFormComponent {
   @Input() education: Education[] = [];
@@ -26,25 +42,27 @@ export class EducationFormComponent {
 
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private stepWizardService: StepWizardService
+    private stepWizardService: StepWizardService,
   ) {
     this.formGroup = this.formBuilder.group({
       educations: this.formBuilder.array([]),
-    })
-
-    this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => {
-      this.changed.emit(value);
-      const { educations } = value;
-      this.stepWizardService.updateResumeData('education', educations)
     });
+
+    this.formGroup.valueChanges
+      .pipe(debounceTime(500))
+      .pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        this.changed.emit(value);
+        const { educations } = value;
+        this.stepWizardService.updateResumeData('education', educations);
+      });
   }
 
   ngOnInit() {
-    if(this.education?.length > 0) {
+    if (this.education?.length > 0) {
       this.assignExistingEducation(this.education);
     }
   }
-
 
   addEducation() {
     const education = this.formBuilder.group({
@@ -53,7 +71,7 @@ export class EducationFormComponent {
       startYear: [null, [Validators.required]],
       endYear: [null],
       description: [null],
-    })
+    });
 
     this.educations.push(education);
   }
@@ -64,13 +82,13 @@ export class EducationFormComponent {
 
     education.forEach((educationItem: any) => {
       const group = this.buildEducationGroup();
-      Object.keys(group.controls).forEach(key => {
+      Object.keys(group.controls).forEach((key) => {
         group.patchValue({
-          [key]: educationItem[key]
-        })
-      })
+          [key]: educationItem[key],
+        });
+      });
       educationArray.push(group);
-    })
+    });
   }
 
   private buildEducationGroup() {
@@ -80,7 +98,7 @@ export class EducationFormComponent {
       startYear: [null, [Validators.required]],
       endYear: [null],
       description: [null],
-    })
+    });
   }
 
   get educations() {

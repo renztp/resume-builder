@@ -2,13 +2,16 @@
 
 <div class="layouts">
   @for (item of allLayouts; track item.value) {
-    <div class="flex-1" (click)="changeSelectedLayout(item.value)">
-      <img [src]="item.imageUrl" alt="">
-      <p-radioButton name="layout-item" [value]="item.value" [(ngModel)]="layout" [inputId]="item.value" />
-      <label [for]="item.value" class="ml-2">
-        {{ item.value }}
-      </label>
-    </div>
+  <div class="flex-1" (click)="changeSelectedLayout(item.value)">
+    <img [src]="item.imageUrl" alt="" />
+    <p-radioButton
+      name="layout-item"
+      [value]="item.value"
+      [(ngModel)]="layout"
+      [inputId]="item.value"
+    />
+    <label [for]="item.value" class="ml-2"> {{ item.value }} </label>
+  </div>
   }
 </div>
 

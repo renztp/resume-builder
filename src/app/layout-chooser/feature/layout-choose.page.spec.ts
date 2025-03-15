@@ -1,4 +1,4 @@
-import {chromium} from 'playwright';
+import { chromium } from 'playwright';
 
 describe('Layout choose page', () => {
   it('should choose a layout', async () => {
@@ -7,5 +7,5 @@ describe('Layout choose page', () => {
     await page.goto('http://localhost:4200/');
     expect(await page.title()).toBe('ResumeBuilder');
     await browser.close();
-  })
-})
+  });
+});

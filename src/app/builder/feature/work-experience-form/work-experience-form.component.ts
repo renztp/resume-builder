@@ -1,32 +1,27 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from "@angular/core";
-import { ResumeData } from "../../../shared/models/resume-data";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ResumeData } from '../../../shared/models/resume-data';
 import {
   FormArray,
   FormGroup,
   ReactiveFormsModule,
   UntypedFormBuilder,
   Validators,
-} from "@angular/forms";
-import { InputTextModule } from "primeng/inputtext";
-import { EditorModule } from "primeng/editor";
-import { ToastModule } from "primeng/toast";
-import { ButtonModule } from "primeng/button";
-import { CommonModule } from "@angular/common";
-import { WorkExperience } from "../../../shared/models/work-experience";
-import { debounceTime, distinctUntilChanged } from "rxjs";
-import { AccordionModule, AccordionTabOpenEvent } from "primeng/accordion";
-import { CalendarModule } from "primeng/calendar";
-import { CheckboxModule } from "primeng/checkbox";
-import { MessageService } from "primeng/api";
-import { StepWizardService } from "@shared/data-access/step-wizard.service";
+} from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { EditorModule } from 'primeng/editor';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule } from '@angular/common';
+import { WorkExperience } from '../../../shared/models/work-experience';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { AccordionModule, AccordionTabOpenEvent } from 'primeng/accordion';
+import { CalendarModule } from 'primeng/calendar';
+import { CheckboxModule } from 'primeng/checkbox';
+import { MessageService } from 'primeng/api';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
-  selector: "app-work-experience-form",
+  selector: 'app-work-experience-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -40,8 +35,8 @@ import { StepWizardService } from "@shared/data-access/step-wizard.service";
     CheckboxModule,
   ],
   providers: [MessageService],
-  templateUrl: "./work-experience-form.component.html",
-  styleUrl: "./work-experience-form.component.scss",
+  templateUrl: './work-experience-form.component.html',
+  styleUrl: './work-experience-form.component.scss',
 })
 export class WorkExperienceFormComponent {
   @Input() workExperience: WorkExperience[] = [];
@@ -53,7 +48,7 @@ export class WorkExperienceFormComponent {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private messageService: MessageService,
-    private stepWizardService: StepWizardService
+    private stepWizardService: StepWizardService,
   ) {
     this.formGroup = this.formBuilder.group({
       workExperiences: this.formBuilder.array([]),
@@ -65,7 +60,7 @@ export class WorkExperienceFormComponent {
       .subscribe((value) => {
         this.changed.emit(value);
         const { workExperiences } = value;
-        this.stepWizardService.updateResumeData('workExperience', workExperiences)
+        this.stepWizardService.updateResumeData('workExperience', workExperiences);
       });
   }
 
@@ -79,9 +74,7 @@ export class WorkExperienceFormComponent {
   }
 
   private assignExistingWorkExperience(workExperience: WorkExperience[]) {
-    const workExperienceArray = this.formGroup.get(
-      "workExperiences",
-    ) as FormArray;
+    const workExperienceArray = this.formGroup.get('workExperiences') as FormArray;
     workExperienceArray.clear();
 
     workExperience.forEach((work: any) => {
@@ -123,7 +116,7 @@ export class WorkExperienceFormComponent {
   }
 
   get workExperiences() {
-    return this.formGroup.controls["workExperiences"] as FormArray;
+    return this.formGroup.controls['workExperiences'] as FormArray;
   }
 
   removeWorkExperience(index: number) {
@@ -132,7 +125,7 @@ export class WorkExperienceFormComponent {
 
   addOrRemoveActiveIndex(activeIndex: number) {
     const index = this.activeIndex.indexOf(activeIndex);
-    if(index > -1) {
+    if (index > -1) {
       this.activeIndex.splice(index, 1);
     } else {
       this.activeIndex.push(activeIndex);
@@ -149,8 +142,8 @@ export class WorkExperienceFormComponent {
 
   togglePresent(index: number) {
     const workExperience = this.workExperiences.at(index);
-    const present = workExperience.get("present");
-    const endYear = workExperience.get("endYear");
+    const present = workExperience.get('present');
+    const endYear = workExperience.get('endYear');
     present?.value?.length > 0 ? endYear?.disable() : endYear?.enable();
   }
 }

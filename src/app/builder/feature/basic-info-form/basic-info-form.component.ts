@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
-import {ImageModule} from 'primeng/image'
+import { ImageModule } from 'primeng/image';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { EditorModule } from 'primeng/editor';
@@ -15,14 +15,24 @@ import { SocialsSelectorComponent } from '../../ui/socials-selector/socials-sele
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
-
 @Component({
   selector: 'app-basic-info-form',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, EditorModule, FileUploadModule, ToastModule, ButtonModule, CommonModule, ImageModule, SocialsSelectorComponent, InputTextareaModule],
+  imports: [
+    ReactiveFormsModule,
+    InputTextModule,
+    EditorModule,
+    FileUploadModule,
+    ToastModule,
+    ButtonModule,
+    CommonModule,
+    ImageModule,
+    SocialsSelectorComponent,
+    InputTextareaModule,
+  ],
   providers: [MessageService, HttpClient],
   templateUrl: './basic-info-form.component.html',
-  styleUrl: './basic-info-form.component.scss'
+  styleUrl: './basic-info-form.component.scss',
 })
 export class BasicInfoFormComponent {
   @Input() basicInfo: BasicInfo = {
@@ -31,12 +41,16 @@ export class BasicInfoFormComponent {
     email: '',
     phoneNumber: '',
     location: '',
-    bio: ''
+    bio: '',
   };
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
 
-  constructor(private formBuilder: UntypedFormBuilder, private messageService: MessageService, private stepWizardService: StepWizardService) {
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private messageService: MessageService,
+    private stepWizardService: StepWizardService,
+  ) {
     this.formGroup = formBuilder.group({
       basicInfo: formBuilder.group({
         name: [null, [Validators.required]],
@@ -45,14 +59,17 @@ export class BasicInfoFormComponent {
         phoneNumber: [null],
         location: [null, [Validators.required]],
         bio: [null, [Validators.required]],
-      })
-    })
-
-    this.formGroup.valueChanges.pipe(debounceTime(500)).pipe(distinctUntilChanged()).subscribe(value => {
-      this.changed.emit(value);
-      const { basicInfo } = value;
-      this.stepWizardService.updateResumeData('basicInfo', basicInfo)
+      }),
     });
+
+    this.formGroup.valueChanges
+      .pipe(debounceTime(500))
+      .pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        this.changed.emit(value);
+        const { basicInfo } = value;
+        this.stepWizardService.updateResumeData('basicInfo', basicInfo);
+      });
   }
 
   ngOnInit() {
@@ -63,13 +80,17 @@ export class BasicInfoFormComponent {
     //     })
     //   }
     // }
-    if(this.basicInfo) {
+    if (this.basicInfo) {
       this.assignExistingBasicInfoToForm(this.basicInfo);
     }
   }
 
   onUpload(event: any) {
-      this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Basic Mode',
+    });
   }
 
   private assignExistingBasicInfoToForm(basicInfoData: BasicInfo) {

@@ -11,21 +11,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 @Component({
   selector: 'app-contacts-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    ButtonModule,
-    InputGroupModule,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, InputGroupModule],
   templateUrl: './contacts-form.component.html',
   styleUrl: './contacts-form.component.scss',
 })
 export class ContactsFormComponent {
   @Input() selectedSocials: Socials[] = [];
   @Input() formGroup: FormGroup = new FormGroup({});
-  constructor() {
-  }
+  constructor() {}
 
   get contacts() {
     return this.formGroup.controls['contacts'] as FormArray;

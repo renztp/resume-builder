@@ -6,8 +6,8 @@ import { DialogModule } from 'primeng/dialog';
 import { FileUploadModule } from 'primeng/fileupload';
 
 interface UploadEvent {
-    originalEvent: Event;
-    files: File[];
+  originalEvent: Event;
+  files: File[];
 }
 
 @Component({
@@ -15,7 +15,7 @@ interface UploadEvent {
   standalone: true,
   imports: [CardModule, ButtonModule, DialogModule, RouterLink, FileUploadModule],
   templateUrl: './setup.page.component.html',
-  styleUrl: './setup.page.component.scss'
+  styleUrl: './setup.page.component.scss',
 })
 export class SetupPageComponent {
   jsonModalVisibility: boolean = false;
@@ -31,7 +31,7 @@ export class SetupPageComponent {
     fileReader.onload = (e) => {
       const jsonObject = JSON.parse(fileReader.result as string);
       console.log('jsonObject', jsonObject);
-    }
+    };
 
     fileReader.readAsText(file);
   }

@@ -1,31 +1,37 @@
-import { BasicInfo } from "@shared/models/basic";
-import { Education } from "@shared/models/education";
-import { ResumeData } from "@shared/models/resume-data";
-import { Socials } from "@shared/models/socials";
-import { WorkExperience } from "@shared/models/work-experience";
-import { Content, ContentStack, TDocumentDefinitions } from "pdfmake/interfaces";
-import { formatDateToYear } from "@shared/utils/date/date.util";
+import { BasicInfo } from '@shared/models/basic';
+import { Education } from '@shared/models/education';
+import { ResumeData } from '@shared/models/resume-data';
+import { Socials } from '@shared/models/socials';
+import { WorkExperience } from '@shared/models/work-experience';
+import { Content, ContentStack, TDocumentDefinitions } from 'pdfmake/interfaces';
+import { formatDateToYear } from '@shared/utils/date/date.util';
 
 const processWorkExperience = (workExperiences: WorkExperience[]): any => {
   const workExperiencesContent = [];
   for (const workExperienceItem of workExperiences) {
-    const formattedStartYear = workExperienceItem.startYear ? formatDateToYear(workExperienceItem.startYear) : '';
-    const formattedEndYear = workExperienceItem.endYear ? formatDateToYear(workExperienceItem.endYear) : 'Present';
+    const formattedStartYear = workExperienceItem.startYear
+      ? formatDateToYear(workExperienceItem.startYear)
+      : '';
+    const formattedEndYear = workExperienceItem.endYear
+      ? formatDateToYear(workExperienceItem.endYear)
+      : 'Present';
     const item = [
       {
-        ...(formattedStartYear ? {
-          text: `${formattedStartYear} - ${formattedStartYear ? formattedEndYear : 'Present'}`,
-          italics: true,
-        } : {})
+        ...(formattedStartYear
+          ? {
+              text: `${formattedStartYear} - ${formattedStartYear ? formattedEndYear : 'Present'}`,
+              italics: true,
+            }
+          : {}),
       },
       {
         text: workExperienceItem.companyName,
         style: 'workExperienceCompanyName',
-        margin: [0, 0, 0, 3]
+        margin: [0, 0, 0, 3],
       },
       {
         text: workExperienceItem.occupation,
-        margin: [0, 0, 0, 5]
+        margin: [0, 0, 0, 5],
       },
       {
         ul: [
@@ -34,32 +40,34 @@ const processWorkExperience = (workExperiences: WorkExperience[]): any => {
           'Created/Managed features for the product that touches frontend and backend with e2e/unit tests',
         ],
         lineHeight: 1.2,
-        margin: [0, 0, 0, 15]
+        margin: [0, 0, 0, 15],
       },
-    ]
+    ];
     workExperiencesContent.push(item);
   }
   return workExperiencesContent;
-}
+};
 
 const processEducation = (education: Education[]): any => {
   const educationContent = [];
   for (const educationItem of education) {
     const item = [
       {
-        ...(educationItem.startYear ? {
-          text: `${educationItem.startYear} - ${new Date(educationItem.endYear).getFullYear().toString() ? new Date(educationItem.endYear).getFullYear().toString() : 'Present'}`,
-          italics: true,
-        } : {})
+        ...(educationItem.startYear
+          ? {
+              text: `${educationItem.startYear} - ${new Date(educationItem.endYear).getFullYear().toString() ? new Date(educationItem.endYear).getFullYear().toString() : 'Present'}`,
+              italics: true,
+            }
+          : {}),
       },
       {
         text: educationItem.schoolName,
         style: 'workExperienceCompanyName',
-        margin: [0, 0, 0, 3]
+        margin: [0, 0, 0, 3],
       },
       {
         text: educationItem.degree,
-        margin: [0, 0, 0, 5]
+        margin: [0, 0, 0, 5],
       },
       {
         ul: [
@@ -68,31 +76,31 @@ const processEducation = (education: Education[]): any => {
           'Created/Managed features for the product that touches frontend and backend with e2e/unit tests',
         ],
         lineHeight: 1.2,
-        margin: [0, 0, 0, 15]
+        margin: [0, 0, 0, 15],
       },
-    ]
+    ];
     educationContent.push(item);
   }
   return educationContent;
-}
+};
 
 const processBasicInfo = (basicInfo: BasicInfo | undefined): Content[] => {
-  if(basicInfo == undefined) {
+  if (basicInfo == undefined) {
     return [];
   }
   return [
     {
       text: basicInfo.name,
       style: 'name',
-      margin: [0, 0, 0, 8]
+      margin: [0, 0, 0, 8],
     },
     {
       text: basicInfo.occupation,
       style: 'occupationStyles',
-      margin: [0, 0, 0, 8]
+      margin: [0, 0, 0, 8],
     },
-  ]
-}
+  ];
+};
 
 /*
  * Resume Order
@@ -107,29 +115,29 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
   const userLocation = basicInfo?.location;
   const userBio = basicInfo?.bio;
   const userContacts: Socials[] = [];
-  if(contactInfo != undefined && contactInfo?.length > 0) {
+  if (contactInfo != undefined && contactInfo?.length > 0) {
     userContacts.push(...contactInfo);
     userContacts.push({
       name: 'location',
       value: userLocation,
-      disabled: false
-    })
+      disabled: false,
+    });
   }
 
   const basicInfoContent = processBasicInfo(basicInfo);
   const workExperiencesContent = processWorkExperience(workExperience);
   const educationContent = processEducation(education);
   const userContactsContent = userContacts.map((contact) => {
-    if(contact.name === userContacts[userContacts.length - 1].name) {
+    if (contact.name === userContacts[userContacts.length - 1].name) {
       return {
         text: `${contact.value}`,
         bold: contact.disabled,
-      }
+      };
     }
     return {
       text: `${contact.value}\t|\t`,
       bold: contact.disabled,
-    }
+    };
   });
 
   return {
@@ -138,21 +146,21 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
       // { text: basicInfo?.name || '', style: 'name', margin: [0, 0, 0, 8] },
       // { text: basicInfo?.occupation || '', style: 'occupationStyles', margin: [0, 0, 0, 8] },
       {
-        text: [
-          ...userContactsContent,
-        ],
-        margin: [0, 0, 0, 15]
+        text: [...userContactsContent],
+        margin: [0, 0, 0, 15],
       },
       {
-        canvas: [{
-          type: 'line',
-          x1: 0,
-          y1: 0,
-          x2: 515,
-          y2: 0,
-          lineWidth: 2,
-        }],
-        margin: [0, 0, 0, 15]
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 2,
+          },
+        ],
+        margin: [0, 0, 0, 15],
       },
       {
         columns: [
@@ -163,20 +171,22 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
           },
           {
             text: userBio,
-          }
+          },
         ],
-        margin: [0, 0, 0, 20]
+        margin: [0, 0, 0, 20],
       },
       {
-        canvas: [{
-          type: 'line',
-          x1: 0,
-          y1: 0,
-          x2: 515,
-          y2: 0,
-          lineWidth: 1,
-        }],
-        margin: [0, 0, 0, 15]
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 1,
+          },
+        ],
+        margin: [0, 0, 0, 15],
       },
       {
         columns: [
@@ -186,21 +196,23 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
             width: 160,
           },
           {
-            stack: workExperiencesContent
-          }
+            stack: workExperiencesContent,
+          },
         ],
-        margin: [0, 0, 0, 15]
+        margin: [0, 0, 0, 15],
       },
       {
-        canvas: [{
-          type: 'line',
-          x1: 0,
-          y1: 0,
-          x2: 515,
-          y2: 0,
-          lineWidth: 1,
-        }],
-        margin: [0, 0, 0, 15]
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 1,
+          },
+        ],
+        margin: [0, 0, 0, 15],
       },
       {
         columns: [
@@ -210,9 +222,9 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
             width: 160,
           },
           {
-            stack: educationContent
-          }
-        ]
+            stack: educationContent,
+          },
+        ],
       },
     ],
     styles: {
@@ -222,7 +234,7 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
       },
       occupationStyles: {
         fontSize: 14,
-        bold: true
+        bold: true,
       },
       sectionHeader: {
         fontSize: 16,
@@ -231,7 +243,7 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
       workExperienceCompanyName: {
         fontSize: 14,
         bold: true,
-      }
-    }
-  }
+      },
+    },
+  };
 }

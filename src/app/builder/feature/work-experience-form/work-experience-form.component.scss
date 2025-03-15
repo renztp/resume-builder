@@ -13,7 +13,7 @@
     .e-grid {
       margin-bottom: 8px;
     }
-    label[for="present-checkbox"] {
+    label[for='present-checkbox'] {
       margin-right: 8px;
     }
     margin-bottom: 30px;
@@ -21,7 +21,9 @@
 }
 
 :host ::ng-deep {
-  p-calendar, p-calendar input, p-calendar span {
+  p-calendar,
+  p-calendar input,
+  p-calendar span {
     width: 100%;
   }
 }

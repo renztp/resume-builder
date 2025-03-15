@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 enum Steps {
   BasicInfo = 0,
   WorkExperience = 1,
   Education = 2,
-  Review = 3
+  Review = 3,
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StepWizardService {
   // selectedLayout: string | null = null;
@@ -19,21 +19,20 @@ export class StepWizardService {
     basicInfo: {},
     contactInfo: [],
     workExperience: [],
-    education: []
+    education: [],
   });
   layout$ = this.selectedLayout.asObservable();
   resumeData$ = this.resumeData.asObservable();
   contactInfoForm$ = this.contactInfoForm.asObservable();
 
-  constructor() {
-  }
+  constructor() {}
 
   setSelectedLayout(layout: string) {
     this.selectedLayout.next(layout);
   }
 
   updateResumeData(key: string, data: any) {
-    const modifiedData = {...this.resumeData.getValue()};
+    const modifiedData = { ...this.resumeData.getValue() };
     modifiedData[key] = data;
     this.resumeData.next(modifiedData);
   }

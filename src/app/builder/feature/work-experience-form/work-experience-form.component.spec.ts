@@ -6,7 +6,7 @@ describe('WorkExperienceFormComponent', () => {
     await render(WorkExperienceFormComponent, {
       inputs: {
         workExperience: [],
-      }
+      },
     });
 
     expect(screen.getByText('Work Experience')).toBeTruthy();

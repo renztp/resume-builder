@@ -1,12 +1,13 @@
 @layer normalize, primeng;
 
-@import "normalize.css" layer(normalize-reset);
-@import "primeicons/primeicons.css";
-@import "../node_modules/quill/dist/quill.core.css";
-@import "../node_modules/quill/dist/quill.snow.css";
+@import 'normalize.css' layer(normalize-reset);
+@import 'primeicons/primeicons.css';
+@import '../node_modules/quill/dist/quill.core.css';
+@import '../node_modules/quill/dist/quill.snow.css';
 
 // Global styles
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;

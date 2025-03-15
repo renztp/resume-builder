@@ -1,10 +1,15 @@
 <div class="form-header">
   <h2>Contact Info</h2>
-  <p-button icon="pi pi-address-book" label="Edit" size="small" (click)="socialLinksVisible = true"></p-button>
+  <p-button
+    icon="pi pi-address-book"
+    label="Edit"
+    size="small"
+    (click)="socialLinksVisible = true"
+  ></p-button>
 </div>
 <form [formGroup]="formGroup" *ngIf="!loading">
   <ng-container formArrayName="contacts">
-    <ng-container *ngFor="let contact of contacts.controls;let i=index;" [formGroupName]="i">
+    <ng-container *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
       <p-inputGroup *ngIf="!contacts.controls[i].value.disabled">
         <button type="button" pButton>{{ contacts.controls[i].value.name }}</button>
         <input type="text" pInputText placeholder="http://" formControlName="value" />
@@ -13,9 +18,18 @@
   </ng-container>
 </form>
 
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="socialLinksVisible" [style]="{ width: '25rem' }">
-  <app-socials-selector [existingSelectedSocials]="selectedSocials" (onNodeSelected)="onSocialsAdded($event)" (onNodeUnselected)="disableControl($event)" />
-  <br>
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="socialLinksVisible"
+  [style]="{ width: '25rem' }"
+>
+  <app-socials-selector
+    [existingSelectedSocials]="selectedSocials"
+    (onNodeSelected)="onSocialsAdded($event)"
+    (onNodeUnselected)="disableControl($event)"
+  />
+  <br />
   <div class="social-selector-buttons">
     <p-button label="Cancel" severity="secondary" (click)="socialLinksVisible = false" />
     <p-button label="Save" (click)="socialLinksVisible = false" />

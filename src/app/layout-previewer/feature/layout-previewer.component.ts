@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [ButtonModule],
   templateUrl: './layout-previewer.component.html',
-  styleUrl: './layout-previewer.component.scss'
+  styleUrl: './layout-previewer.component.scss',
 })
 export class LayoutPreviewerComponent {
   layout: string | null = '';
@@ -21,39 +21,42 @@ export class LayoutPreviewerComponent {
       email: '',
       phoneNumber: '',
       location: '',
-      bio: ''
+      bio: '',
     },
     contactInfo: [],
     workExperience: [],
-    education: []
+    education: [],
   };
   constructor(private stepWizardService: StepWizardService) {
     pdfMake.fonts = {
       Roboto: {
-        normal: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
+        normal:
+          'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf',
         bold: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf',
-        italics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf',
-        bolditalics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf'
+        italics:
+          'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf',
+        bolditalics:
+          'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf',
       },
-    }
+    };
 
     this.initResumeData();
     stepWizardService.resumeData$.subscribe({
-      next: value => {
+      next: (value) => {
         this.resumeData = value;
         this.reloadResumeData();
-      }
-    })
+      },
+    });
 
     stepWizardService.layout$.subscribe({
-      next: value => {
+      next: (value) => {
         this.layout = value;
-      }
-    })
+      },
+    });
   }
 
   applyIframeAttributes(dataUrl: string, iframe: HTMLIFrameElement) {
-    iframe.src = dataUrl + "#toolbar=0";
+    iframe.src = dataUrl + '#toolbar=0';
     iframe.height = '100%';
     iframe.width = '95%';
     iframe.allowFullscreen = true;

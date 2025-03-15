@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './step-wizard-footer.component.html',
-  styleUrl: './step-wizard-footer.component.scss'
+  styleUrl: './step-wizard-footer.component.scss',
 })
-export class StepWizardFooterComponent {
-}
+export class StepWizardFooterComponent {}
