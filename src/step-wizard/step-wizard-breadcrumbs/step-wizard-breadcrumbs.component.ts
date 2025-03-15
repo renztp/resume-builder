@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './step-wizard-breadcrumbs.component.html',
-  styleUrl: './step-wizard-breadcrumbs.component.scss'
+  styleUrl: './step-wizard-breadcrumbs.component.scss',
 })
-export class StepWizardBreadcrumbsComponent {
-
-}
+export class StepWizardBreadcrumbsComponent {}

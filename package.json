@@ -9,8 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "e2e:test": "jest",
-    "prepare": "husky",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {

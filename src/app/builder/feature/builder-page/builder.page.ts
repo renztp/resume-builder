@@ -9,7 +9,7 @@ import { LayoutPreviewerComponent } from '../../../layout-previewer/feature/layo
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { BasicInfoFormComponent } from "../basic-info-form/basic-info-form.component";
+import { BasicInfoFormComponent } from '../basic-info-form/basic-info-form.component';
 import { WorkExperienceFormComponent } from '../work-experience-form/work-experience-form.component';
 import { ResumeData } from '../../../shared/models/resume-data';
 import { EducationFormComponent } from '../education-form/education-form.component';
@@ -24,9 +24,21 @@ import { Socials } from '@shared/models/socials';
 @Component({
   selector: 'app-builder.page',
   standalone: true,
-  imports: [FormsModule, CommonModule, TabMenuModule, SidebarComponent, LayoutPreviewerComponent, ButtonModule, BasicInfoFormComponent, WorkExperienceFormComponent, EducationFormComponent, SidemenuComponent, ContactInfoFormComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    TabMenuModule,
+    SidebarComponent,
+    LayoutPreviewerComponent,
+    ButtonModule,
+    BasicInfoFormComponent,
+    WorkExperienceFormComponent,
+    EducationFormComponent,
+    SidemenuComponent,
+    ContactInfoFormComponent,
+  ],
   templateUrl: './builder.page.html',
-  styleUrl: './builder.page.scss'
+  styleUrl: './builder.page.scss',
 })
 export class BuilderPageComponent {
   resumeData: ResumeData;
@@ -40,7 +52,10 @@ export class BuilderPageComponent {
 
   selectedLayout: string | null = null;
 
-  constructor(private router: ActivatedRoute, private stepWizardService: StepWizardService) {
+  constructor(
+    private router: ActivatedRoute,
+    private stepWizardService: StepWizardService,
+  ) {
     this.resumeData = {
       basicInfo: {
         name: '',
@@ -52,7 +67,7 @@ export class BuilderPageComponent {
       },
       contactInfo: [],
       workExperience: [],
-      education: []
+      education: [],
     };
     this.basicInfo = {
       name: '',
@@ -60,7 +75,7 @@ export class BuilderPageComponent {
       email: '',
       phoneNumber: '',
       location: '',
-      bio: ''
+      bio: '',
     };
     this.contactInfo = [];
     this.workExperience = [];
@@ -73,8 +88,8 @@ export class BuilderPageComponent {
         this.contactInfo = data.contactInfo;
         this.workExperience = data.workExperience;
         this.education = data.education;
-      }
-    })
+      },
+    });
   }
 
   ngOnInit() {
@@ -91,9 +106,9 @@ export class BuilderPageComponent {
   }
 
   setupResumeData() {
-    this.stepWizardService.layout$.subscribe(layout => {
+    this.stepWizardService.layout$.subscribe((layout) => {
       this.selectedLayout = layout;
-    })
+    });
   }
 
   onActiveItemChange(event: MenuItem) {
@@ -101,36 +116,36 @@ export class BuilderPageComponent {
   }
 
   navigateNext() {
-    const currentIndex = this.items.findIndex(item => item === this.activeItem);
+    const currentIndex = this.items.findIndex((item) => item === this.activeItem);
     if (currentIndex < this.items.length - 1) {
       this.activeItem = this.items[currentIndex + 1];
     }
   }
 
   navigatePrevious() {
-    const currentIndex = this.items.findIndex(item => item === this.activeItem);
+    const currentIndex = this.items.findIndex((item) => item === this.activeItem);
     if (currentIndex > 0) {
       this.activeItem = this.items[currentIndex - 1];
     }
   }
 
   onDataChanged($event: any) {
-    if($event.basicInfo) {
+    if ($event.basicInfo) {
       this.basicInfo = $event.basicInfo;
     }
 
-    if($event.workExperiences) {
+    if ($event.workExperiences) {
       this.workExperience = $event.workExperiences;
     }
 
-    if($event.educations) {
+    if ($event.educations) {
       this.education = $event.educations;
     }
 
     console.log({
       basicInfo: this.basicInfo,
       workExperience: this.workExperience,
-      education: this.education
-    })
+      education: this.education,
+    });
   }
 }

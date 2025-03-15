@@ -9,7 +9,8 @@ export const routes: Routes = [
   { path: 'layout-chooser', component: LayoutChooserPageComponent },
   // { path: '', component: UploaderPageComponent },
   {
-    path: 'builder', component: BuilderPageComponent,
+    path: 'builder',
+    component: BuilderPageComponent,
     // children: [
     //   {
     //     path: 'basic-info',
@@ -17,5 +18,5 @@ export const routes: Routes = [
     //   }
     // ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];

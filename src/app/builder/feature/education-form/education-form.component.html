@@ -3,9 +3,12 @@
   <div>
     <p-accordion [multiple]="true" class="education-wrapper">
       <div formArrayName="educations">
-        <p-accordionTab [header]="educations.controls[i].value.schoolName|| 'Education ' + (i+1)"
-                        class="accordion-item" *ngFor="let education of educations.controls;let i=index"
-                        [formGroupName]="i">
+        <p-accordionTab
+          [header]="educations.controls[i].value.schoolName || 'Education ' + (i + 1)"
+          class="accordion-item"
+          *ngFor="let education of educations.controls; let i = index"
+          [formGroupName]="i"
+        >
           <div class="e-input">
             <label for="username">School Name</label>
             <input pInputText id="schoolName" formControlName="schoolName" />

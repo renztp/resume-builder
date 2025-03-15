@@ -8,9 +8,8 @@ describe('LayoutPreviewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LayoutPreviewerComponent]
-    })
-    .compileComponents();
+      imports: [LayoutPreviewerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutPreviewerComponent);
     component = fixture.componentInstance;

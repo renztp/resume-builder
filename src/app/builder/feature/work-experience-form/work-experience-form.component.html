@@ -2,11 +2,20 @@
 <form [formGroup]="formGroup" *ngIf="!loading">
   <div>
     <!-- TODO: Make this more readable and clean, maybe create a reusable component -->
-    <p-accordion [multiple]="true" class="work-experience-wrapper" (onOpen)="onOpen($event)" (onClose)="onClose($event)" [activeIndex]="activeIndex">
+    <p-accordion
+      [multiple]="true"
+      class="work-experience-wrapper"
+      (onOpen)="onOpen($event)"
+      (onClose)="onClose($event)"
+      [activeIndex]="activeIndex"
+    >
       <div formArrayName="workExperiences">
-        <p-accordionTab [header]="workExperiences.controls[i].value.companyName || 'Work Experience ' + (i+1)"
-                        class="accordion-item" *ngFor="let workExperience of workExperiences.controls;let i=index"
-                        [formGroupName]="i">
+        <p-accordionTab
+          [header]="workExperiences.controls[i].value.companyName || 'Work Experience ' + (i + 1)"
+          class="accordion-item"
+          *ngFor="let workExperience of workExperiences.controls; let i = index"
+          [formGroupName]="i"
+        >
           <div class="e-input">
             <label for="username">Company Name</label>
             <input pInputText id="companyName" formControlName="companyName" />
@@ -34,7 +43,8 @@
                 formControlName="present"
                 value="present"
                 (click)="togglePresent(i)"
-                inputId="binary" />
+                inputId="binary"
+              />
             </div>
           </div>
           <div class="e-input">

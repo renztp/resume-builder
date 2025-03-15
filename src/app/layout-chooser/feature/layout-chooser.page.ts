@@ -11,7 +11,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
   standalone: true,
   imports: [RadioButtonModule, FormsModule, ButtonModule, RouterLink],
   templateUrl: './layout-chooser.page.html',
-  styleUrl: './layout-chooser.page.scss'
+  styleUrl: './layout-chooser.page.scss',
 })
 export class LayoutChooserPageComponent {
   layout!: string;
@@ -20,20 +20,22 @@ export class LayoutChooserPageComponent {
   allLayouts = [
     {
       value: 'minimal',
-      imageUrl: '../../../assets/images/layout-1.png'
+      imageUrl: '../../../assets/images/layout-1.png',
     },
     {
       value: 'linear',
-      imageUrl: '../../../assets/images/layout-2.png'
+      imageUrl: '../../../assets/images/layout-2.png',
     },
     {
       value: 'detailed',
-      imageUrl: '../../../assets/images/layout-3.png'
-    }
-  ]
+      imageUrl: '../../../assets/images/layout-3.png',
+    },
+  ];
 
-  constructor(private router: Router, private stepWizardService: StepWizardService) {
-  }
+  constructor(
+    private router: Router,
+    private stepWizardService: StepWizardService,
+  ) {}
 
   changeSelectedLayout(layout: string) {
     this.layout = layout;
@@ -41,6 +43,6 @@ export class LayoutChooserPageComponent {
   }
 
   navigateBuilder() {
-    this.router.navigate(['/builder'])
+    this.router.navigate(['/builder']);
   }
 }

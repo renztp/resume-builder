@@ -1,14 +1,8 @@
 {
   "preset": "jest-preset-angular",
-  "transformIgnorePatterns": [
-    "node_modules/(?!.*\\.mjs$)"
-  ],
-  "setupFilesAfterEnv": [
-    "<rootDir>/src/test-setup.ts"
-  ],
-  "testMatch": [
-    "**/src/app/**/*.spec.ts"
-  ],
+  "transformIgnorePatterns": ["node_modules/(?!.*\\.mjs$)"],
+  "setupFilesAfterEnv": ["<rootDir>/src/test-setup.ts"],
+  "testMatch": ["**/src/app/**/*.spec.ts"],
   "moduleNameMapper": {
     "@/(.*)": "<rootDir>/src/$1",
     "@shared/(.*)": "<rootDir>/src/app/shared/$1",
@@ -17,4 +11,3 @@
     "@assets/(.*)": "<rootDir>/src/app/assets/$1"
   }
 }
-

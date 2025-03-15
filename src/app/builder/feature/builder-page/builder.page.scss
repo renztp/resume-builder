@@ -54,24 +54,24 @@
   }
 
   /* .app-wrapper { */
-    /* sidebar styles */
-    /* position: absolute; */
-    /* grid-template-columns: 30vw 1fr; */
+  /* sidebar styles */
+  /* position: absolute; */
+  /* grid-template-columns: 30vw 1fr; */
 
-    /* height: 100%; */
-    /* width: 100%; */
-    /* display: grid; */
-    /* margin: 0 auto; */
-    /* max-width: 70vw; */
+  /* height: 100%; */
+  /* width: 100%; */
+  /* display: grid; */
+  /* margin: 0 auto; */
+  /* max-width: 70vw; */
   /* } */
 }
 
 :host ::ng-deep {
-  .app-wrapper p-tabmenu a[role="menuitem"] {
+  .app-wrapper p-tabmenu a[role='menuitem'] {
     padding: 15px;
   }
 
-  .app-wrapper .menu-wrapper{
+  .app-wrapper .menu-wrapper {
     position: relative;
     padding: 0px 15px;
 

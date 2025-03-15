@@ -1,18 +1,18 @@
-import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
-import socials from "@assets/socials.json"
-import { StepWizardService } from "@shared/data-access/step-wizard.service";
-import { Socials } from "@shared/models/socials";
-import { TreeNode } from "primeng/api";
-import { ButtonModule } from "primeng/button";
-import {TreeModule} from 'primeng/tree'
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import socials from '@assets/socials.json';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
+import { Socials } from '@shared/models/socials';
+import { TreeNode } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { TreeModule } from 'primeng/tree';
 
 @Component({
   selector: 'app-socials-selector',
   standalone: true,
   imports: [TreeModule, CommonModule, ButtonModule],
   templateUrl: './socials-selector.component.html',
-  styleUrl: './socials-selector.component.scss'
+  styleUrl: './socials-selector.component.scss',
 })
 export class SocialsSelectorComponent implements OnInit {
   availSocials = socials;
@@ -22,8 +22,7 @@ export class SocialsSelectorComponent implements OnInit {
   @Output() onNodeSelected = new EventEmitter<Socials>();
   @Output() onNodeUnselected = new EventEmitter<string>();
 
-  constructor(private stepWizardService: StepWizardService) {
-  }
+  constructor(private stepWizardService: StepWizardService) {}
 
   ngOnInit() {
     this.buildSocialsTree();
@@ -40,15 +39,15 @@ export class SocialsSelectorComponent implements OnInit {
     this.onNodeSelected.emit({
       name: event.node.label,
       value: '',
-      disabled: false
+      disabled: false,
     });
     this.stepWizardService.updateContactInfoForm(this.selectedSocials);
   }
 
   onNodeUnselect(event: any) {
-    this.onNodeUnselected.emit(event.node.label)
+    this.onNodeUnselected.emit(event.node.label);
 
-    this.stepWizardService.updateContactInfoForm(this.selectedSocials)
+    this.stepWizardService.updateContactInfoForm(this.selectedSocials);
   }
 
   buildSocialsTree(existingSelectedSocials?: string[]) {
@@ -57,18 +56,18 @@ export class SocialsSelectorComponent implements OnInit {
         key: social.toLowerCase(),
         selectable: true,
         label: social,
-        data: social.toLowerCase()
-      }
-    })
+        data: social.toLowerCase(),
+      };
+    });
 
-    if(existingSelectedSocials) {
+    if (existingSelectedSocials) {
       this.selectedSocials = this.existingSelectedSocials.map((social) => {
         return {
           key: social.name.toLowerCase(),
           selectable: true,
           label: social.name,
-          data: social.name.toLowerCase()
-        }
+          data: social.name.toLowerCase(),
+        };
       });
     }
   }
