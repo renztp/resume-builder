@@ -1,17 +1,16 @@
-<div>
-  {{ selectedSocials | json }}
-</div>
-<!-- <form [formGroup]="formGroup"> -->
-<!--   <ng-container *ngFor="let contact of contacts.controls;let i=index"> -->
-<!--     <p-inputGroup *ngIf="!contacts.controls[i].disabled" [formGroupName]="i"> -->
-<!--       <button type="button" pButton></button> -->
-<!--       <input type="text" pInputText placeholder="http://" /> -->
-<!--     </p-inputGroup> -->
-<!--   </ng-container> -->
-<!-- </form> -->
-<!-- <form> -->
-<!--   <p-inputGroup> -->
-<!--     <button type="button" pButton label="Search"></button> -->
-<!--     <input type="text" pInputText placeholder="Keyword" /> -->
-<!--   </p-inputGroup> -->
-<!-- </form> -->
+@if(contactItems.length > 0) {
+  <form [formGroup]="contactsFormGroup" *ngIf="!loading">
+    <ng-container formArrayName="contacts">
+      <ng-container *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
+        <p-inputGroup *ngIf="!contacts.controls[i].value.disabled">
+          <button type="button" pButton>{{ contacts.controls[i].value.name }}</button>
+          <input type="text" pInputText placeholder="http://" formControlName="value" />
+        </p-inputGroup>
+      </ng-container>
+    </ng-container>
+  </form>
+}
+@else {
+  <p>Please click Edit to add new contacts.</p>
+}
+

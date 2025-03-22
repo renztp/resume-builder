@@ -1,10 +1,20 @@
-<div class="card" *ngIf="treeData">
-  <p-tree
-    [value]="treeData"
-    filter="true"
-    selectionMode="checkbox"
-    [(selection)]="selectedSocials"
-    (onNodeSelect)="onNodeSelect($event)"
-    (onNodeUnselect)="onNodeUnselect($event)"
-  />
-</div>
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="isDialogOpen"
+  [style]="{ width: '25rem' }"
+>
+  <div class="card" *ngIf="treeData">
+    <p-tree
+      [value]="treeData"
+      filter="true"
+      selectionMode="checkbox"
+      [(selection)]="selectedContacts"
+    />
+  </div>
+  <br />
+  <div class="social-selector-buttons">
+    <p-button label="Cancel" severity="secondary" (click)="closeDialog()" />
+    <p-button label="Save" (click)="saveClicked()" />
+  </div>
+</p-dialog>

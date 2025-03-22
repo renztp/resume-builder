@@ -1,18 +1,13 @@
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-} from '@angular/core';
-import { SocialsSelectorComponent } from '../../ui/socials-selector/socials-selector.component';
+  DialogClosePayload,
+  SocialsSelectorComponent,
+} from '../../ui/socials-selector/socials-selector.component';
 import {
-  FormArray,
   FormGroup,
   ReactiveFormsModule,
-  UntypedFormArray,
   UntypedFormBuilder,
+  UntypedFormGroup,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
@@ -20,14 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ContactsFormComponent } from '../../ui/contacts-form/contacts-form.component';
 import { Socials } from '@shared/models/socials';
 import { InputGroupModule } from 'primeng/inputgroup';
-import { StepWizardService } from '@shared/data-access/step-wizard.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
-
-// use for info phase state
-enum ContactInfoPhases {
-  SocialsSelectionPhase = 0,
-  ContactInfoFormPhase = 1,
-}
+import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-contact-info-form',
@@ -45,114 +33,121 @@ enum ContactInfoPhases {
   styleUrl: './contact-info-form.component.scss',
 })
 export class ContactInfoFormComponent implements OnChanges {
-  @Input() contactInfo: Socials[] = [];
+  @Input() existingContactsInfo: Socials[] = [];
   @Output() next = new EventEmitter<void>();
   @Output() changed = new EventEmitter<FormGroup>();
-  selectedSocials: Socials[] = [];
-  formGroup: FormGroup;
-  phase: ContactInfoPhases;
+  contacts: Socials[] = [];
+  preSelectedContacts: Socials[] = [];
+  formContacts: Socials[] = [];
   socialLinksVisible = false;
   loading: boolean = false;
 
-  constructor(
-    private formBuilder: UntypedFormBuilder,
-    private stepWizardService: StepWizardService,
-    private cdr: ChangeDetectorRef,
-  ) {
-    this.phase = ContactInfoPhases.SocialsSelectionPhase;
-    this.formGroup = this.formBuilder.group({
-      contacts: this.formBuilder.array([]),
-    });
+  constructor(private formBuilder: UntypedFormBuilder) {}
 
-    this.contacts.push(
-      this.formBuilder.group({
-        name: 'Email',
-        value: '',
-        disabled: false,
-      }),
-    );
-
-    this.formGroup.valueChanges
-      .pipe(debounceTime(500))
-      .pipe(distinctUntilChanged())
-      .subscribe((value) => {
-        this.changed.emit(value);
-        const { contacts } = value;
-        this.stepWizardService.updateResumeData('contactInfo', contacts);
-      });
-
-    this.stepWizardService.contactInfoForm$.subscribe({
-      next: (value) => {
-        this.loading = true;
-        // this.cdr.detectChanges();
-        this.loading = false;
-      },
-    });
+  ngOnInit() {
+    if (this.existingContactsInfo.length > 0) {
+      this.preSelectedContacts = this.existingContactsInfo;
+    }
   }
 
   ngOnChanges() {}
 
-  computeSocialContacts(socials: Socials[]) {
-    for (const social of socials) {
-      const socialLink = this.formBuilder.group({
-        name: social.name,
-        value: social.value,
-        disabled: social.disabled,
-      });
-      this.contacts.push(socialLink);
+  onSelectedContactsChange(event: TreeNode[]) {
+    if (event.length === 0) return;
+    const processedContacts = this.processContacts(event);
+    if (this.contacts.length > 0) {
+      this.processContactDiffs(event);
     }
   }
 
-  get contacts() {
-    return this.formGroup.controls['contacts'] as UntypedFormArray;
+  handleOnCloseDialog(event: DialogClosePayload) {
+    const { dialogVisibility, selectedNodes = [] } = event;
+
+    if (selectedNodes?.length === 0) {
+      this.formContacts = [];
+      this.socialLinksVisible = dialogVisibility;
+      return;
+    }
+    const processedContacts = this.processContacts(selectedNodes);
+    this.formContacts = processedContacts;
+    this.socialLinksVisible = dialogVisibility;
   }
 
-  finishSocialsSelectionPhase() {
-    this.phase = ContactInfoPhases.ContactInfoFormPhase;
-  }
-
-  addSocialContact() {
-    const contactSocial = this.formBuilder.group({
-      name: [Math.random().toString(36).substring(7)],
-      value: [''],
+  processContactDiffs(currentSelectedContacts: TreeNode[]): void {
+    const modifiedSelectedContacts: Socials[] = currentSelectedContacts.map((contact) => ({
+      name: contact.label ? contact.label : '',
       disabled: false,
-    });
+      value: contact?.data?.value ?? '',
+    }));
 
-    this.contacts.push(contactSocial);
-  }
+    if (modifiedSelectedContacts.length === 0 && this.contacts.length > 0) {
+      this.contacts = [];
+      return;
+    }
 
-  private findAndDisableSocial(social: Socials) {
-    for (const contact of this.contacts.value) {
-      if (contact.name === social.name) {
-        contact.disabled = true;
+    if (this.contacts.length === 0) {
+      this.contacts = modifiedSelectedContacts;
+      return;
+    }
+
+    if (this.contacts.length > modifiedSelectedContacts.length) {
+      this.disableCurrentContacts(this.contacts, modifiedSelectedContacts);
+    }
+
+    const activeContacts = this.contacts.filter((contact) => !contact.disabled);
+    if (modifiedSelectedContacts.length > activeContacts.length) {
+      this.enableCurrentContacts(this.contacts, modifiedSelectedContacts);
+
+      // TODO: This might be removed if just adding all available contacts OnInit instead of adding new contacts
+      const newContactsToAdd = modifiedSelectedContacts.filter(
+        (currentSelectedContact) =>
+          !this.contacts.some((contact) => currentSelectedContact.name === contact.name),
+      );
+
+      if (newContactsToAdd.length > 0) {
+        newContactsToAdd.forEach((newContact) => this.contacts.push(newContact));
       }
     }
   }
 
-  onSocialsAdded(social: Socials) {
-    const incomingSocialExists = this.contacts.value.some(
-      (contact: Socials) => contact.name === social.name,
+  disableCurrentContacts(currentContacts: Socials[], incomingContacts: Socials[]): void {
+    const filteredContacts = currentContacts.filter(
+      (contact) =>
+        !incomingContacts.some(
+          (currentSelectedContact) => contact.name === currentSelectedContact.name,
+        ),
     );
-    if (incomingSocialExists) {
-      this.findAndDisableSocial(social);
-    } else {
-      this.contacts.push(this.formBuilder.group(social));
-    }
-
-    this.socialLinksVisible = true;
-    this.cdr.detectChanges();
+    filteredContacts.forEach((filteredContact) => (filteredContact.disabled = true));
   }
 
-  disableControl(socialLabel: string) {
-    const contacts = this.contacts.value;
-    for (const contact of contacts) {
-      if (contact.name === socialLabel) {
-        contact.disabled = true;
-      }
-    }
+  enableCurrentContacts(currentContacts: Socials[], incomingContacts: Socials[]): void {
+    const contactsToEnable = incomingContacts.filter((incomingContact) =>
+      currentContacts.some(
+        (contact) =>
+          contact.name === incomingContact.name && contact.disabled !== incomingContact.disabled,
+      ),
+    );
 
-    const allItemsDisabled = contacts.every((contact: Socials) => contact.disabled);
-    this.socialLinksVisible = allItemsDisabled ? false : true;
-    this.cdr.detectChanges();
+    if (contactsToEnable.length > 0) {
+      contactsToEnable.forEach((contactToEnable) => {
+        const inactiveContact = currentContacts.find(
+          (contact) => contact.name === contactToEnable.name,
+        );
+        if (inactiveContact) {
+          inactiveContact.disabled = false;
+        }
+      });
+    }
+  }
+
+  processContacts(selectedContacts: TreeNode[]): Socials[] {
+    this.processContactDiffs(selectedContacts);
+
+    const activeContacts = this.contacts.filter((contact) => !contact.disabled);
+    if (activeContacts.length > 0) {
+      return activeContacts;
+    } else {
+      return [];
+    }
   }
 }

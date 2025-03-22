@@ -5,22 +5,30 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { Socials } from '@shared/models/socials';
 import { TreeNode } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { InputGroupModule } from 'primeng/inputgroup';
 import { TreeModule } from 'primeng/tree';
+
+export interface DialogClosePayload {
+  dialogVisibility: boolean;
+  selectedNodes?: TreeNode[];
+}
 
 @Component({
   selector: 'app-socials-selector',
   standalone: true,
-  imports: [TreeModule, CommonModule, ButtonModule],
+  imports: [TreeModule, CommonModule, ButtonModule, DialogModule],
   templateUrl: './socials-selector.component.html',
   styleUrl: './socials-selector.component.scss',
 })
 export class SocialsSelectorComponent implements OnInit {
   availSocials = socials;
   treeData: TreeNode[] = [];
-  @Input() existingSelectedSocials: Socials[] = [];
-  selectedSocials: TreeNode[] = [];
-  @Output() onNodeSelected = new EventEmitter<Socials>();
-  @Output() onNodeUnselected = new EventEmitter<string>();
+  @Input() existingSelectedContacts: Socials[] = [];
+  @Input() isDialogOpen: boolean = false;
+  selectedContacts: TreeNode[] = [];
+  @Output() onSelectedSocialsSaved = new EventEmitter<TreeNode[]>();
+  @Output() onCloseDialog = new EventEmitter<DialogClosePayload>();
 
   constructor(private stepWizardService: StepWizardService) {}
 
@@ -28,26 +36,15 @@ export class SocialsSelectorComponent implements OnInit {
     this.buildSocialsTree();
   }
 
-  onNodeSelect(event: any) {
-    // const selectedSocialsLabels = this.selectedSocials.map((node) => {
-    //   return {
-    //     name: node.label != undefined ? node.label : '',
-    //     value: '',
-    //     disabled: false
-    //   }
-    // });
-    this.onNodeSelected.emit({
-      name: event.node.label,
-      value: '',
-      disabled: false,
+  saveClicked() {
+    this.onCloseDialog.emit({
+      dialogVisibility: false,
+      selectedNodes: this.selectedContacts,
     });
-    this.stepWizardService.updateContactInfoForm(this.selectedSocials);
   }
 
-  onNodeUnselect(event: any) {
-    this.onNodeUnselected.emit(event.node.label);
-
-    this.stepWizardService.updateContactInfoForm(this.selectedSocials);
+  closeDialog() {
+    this.onCloseDialog.emit({ dialogVisibility: false });
   }
 
   buildSocialsTree(existingSelectedSocials?: string[]) {
@@ -61,7 +58,7 @@ export class SocialsSelectorComponent implements OnInit {
     });
 
     if (existingSelectedSocials) {
-      this.selectedSocials = this.existingSelectedSocials.map((social) => {
+      this.selectedContacts = this.existingSelectedContacts.map((social) => {
         return {
           key: social.name.toLowerCase(),
           selectable: true,

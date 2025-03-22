@@ -141,11 +141,5 @@ export class BuilderPageComponent {
     if ($event.educations) {
       this.education = $event.educations;
     }
-
-    console.log({
-      basicInfo: this.basicInfo,
-      workExperience: this.workExperience,
-      education: this.education,
-    });
   }
 }

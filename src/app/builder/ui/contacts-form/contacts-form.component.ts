@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input, Output, SimpleChanges } from '@angular/core';
+import {
+  FormArray,
+  FormGroup,
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { Socials } from '@shared/models/socials';
-import { StepWizardService } from '@shared/data-access/step-wizard.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-contacts-form',
@@ -16,11 +21,43 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrl: './contacts-form.component.scss',
 })
 export class ContactsFormComponent {
+  @Input() contactItems: Socials[] = [];
   @Input() selectedSocials: Socials[] = [];
-  @Input() formGroup: FormGroup = new FormGroup({});
-  constructor() {}
+
+  loading: boolean = false;
+  contactsFormGroup: FormGroup;
+
+  constructor(private formBuilder: UntypedFormBuilder) {
+    this.contactsFormGroup = this.formBuilder.group({
+      contacts: this.formBuilder.array([]),
+    });
+  }
+
+  ngOnInit() {}
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges['contactItems']) {
+      this.contactsFormGroup = this.formBuilder.group({
+        contacts: this.formBuilder.array([]),
+      });
+      this.processContacts();
+    }
+  }
+
+  processContacts() {
+    this.contactItems.forEach((contact) => {
+      const field = this.formBuilder.group({
+        name: contact.name,
+        value: contact.value,
+      });
+      if (contact.disabled) {
+        field.disable();
+      }
+      this.contacts.push(field);
+    });
+  }
 
   get contacts() {
-    return this.formGroup.controls['contacts'] as FormArray;
+    return this.contactsFormGroup.controls['contacts'] as FormArray;
   }
 }

@@ -119,8 +119,8 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
     userContacts.push(...contactInfo);
     userContacts.push({
       name: 'location',
-      value: userLocation,
       disabled: false,
+      value: userLocation,
     });
   }
 
