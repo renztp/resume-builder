@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import {
   FormArray,
   FormGroup,
@@ -12,6 +12,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { Socials } from '@shared/models/socials';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { StepWizardService } from '~/app/shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-contacts-form',
@@ -23,37 +25,53 @@ import { Socials } from '@shared/models/socials';
 export class ContactsFormComponent {
   @Input() contactItems: Socials[] = [];
   @Input() selectedSocials: Socials[] = [];
+  @Output() onFieldChange = new EventEmitter();
 
   loading: boolean = false;
   contactsFormGroup: FormGroup;
 
-  constructor(private formBuilder: UntypedFormBuilder) {
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private stepWizardService: StepWizardService,
+  ) {
     this.contactsFormGroup = this.formBuilder.group({
       contacts: this.formBuilder.array([]),
     });
+
+    this.contactsFormGroup.valueChanges
+      .pipe(debounceTime(500))
+      .pipe(distinctUntilChanged())
+      .subscribe((allContacts: { contacts: Socials[] }) => {
+        const validFields = allContacts.contacts.filter((contact) => contact.value);
+        if (validFields.length === 0) {
+          this.stepWizardService.updateResumeData('contactInfo', []);
+        }
+        this.stepWizardService.updateResumeData('contactInfo', validFields);
+      });
   }
 
   ngOnInit() {}
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     if (simpleChanges['contactItems']) {
-      this.contactsFormGroup = this.formBuilder.group({
-        contacts: this.formBuilder.array([]),
-      });
       this.processContacts();
     }
   }
 
+  get availableContacts() {
+    return this.contactItems.filter((contact) => !contact.disabled);
+  }
+
   processContacts() {
+    this.contacts.clear();
     this.contactItems.forEach((contact) => {
-      const field = this.formBuilder.group({
-        name: contact.name,
-        value: contact.value,
-      });
-      if (contact.disabled) {
-        field.disable();
+      if (!contact?.disabled) {
+        const field = this.formBuilder.group({
+          name: contact.name,
+          value: contact.value,
+        });
+        this.contacts.push(field);
       }
-      this.contacts.push(field);
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import {
   DialogClosePayload,
   SocialsSelectorComponent,
@@ -32,7 +32,7 @@ import { TreeNode } from 'primeng/api';
   templateUrl: './contact-info-form.component.html',
   styleUrl: './contact-info-form.component.scss',
 })
-export class ContactInfoFormComponent implements OnChanges {
+export class ContactInfoFormComponent implements OnChanges, OnInit {
   @Input() existingContactsInfo: Socials[] = [];
   @Output() next = new EventEmitter<void>();
   @Output() changed = new EventEmitter<FormGroup>();
@@ -44,21 +44,9 @@ export class ContactInfoFormComponent implements OnChanges {
 
   constructor(private formBuilder: UntypedFormBuilder) {}
 
-  ngOnInit() {
-    if (this.existingContactsInfo.length > 0) {
-      this.preSelectedContacts = this.existingContactsInfo;
-    }
-  }
+  ngOnInit() {}
 
   ngOnChanges() {}
-
-  onSelectedContactsChange(event: TreeNode[]) {
-    if (event.length === 0) return;
-    const processedContacts = this.processContacts(event);
-    if (this.contacts.length > 0) {
-      this.processContactDiffs(event);
-    }
-  }
 
   handleOnCloseDialog(event: DialogClosePayload) {
     const { dialogVisibility, selectedNodes = [] } = event;
@@ -81,7 +69,9 @@ export class ContactInfoFormComponent implements OnChanges {
     }));
 
     if (modifiedSelectedContacts.length === 0 && this.contacts.length > 0) {
-      this.contacts = [];
+      this.contacts.forEach((contact) => {
+        contact.disabled = true;
+      });
       return;
     }
 

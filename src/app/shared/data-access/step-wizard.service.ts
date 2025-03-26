@@ -12,7 +12,6 @@ enum Steps {
   providedIn: 'root',
 })
 export class StepWizardService {
-  // selectedLayout: string | null = null;
   private contactInfoForm = new BehaviorSubject<any[]>([]);
   private selectedLayout = new BehaviorSubject<string | null>(null);
   private resumeData = new BehaviorSubject<any>({

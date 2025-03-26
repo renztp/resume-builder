@@ -1,4 +1,4 @@
-@if(contactItems.length > 0) {
+@if(availableContacts.length > 0) {
   <form [formGroup]="contactsFormGroup" *ngIf="!loading">
     <ng-container formArrayName="contacts">
       <ng-container *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
