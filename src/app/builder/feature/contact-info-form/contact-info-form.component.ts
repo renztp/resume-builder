@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   DialogClosePayload,
   SocialsSelectorComponent,
@@ -32,7 +32,7 @@ import { TreeNode } from 'primeng/api';
   templateUrl: './contact-info-form.component.html',
   styleUrl: './contact-info-form.component.scss',
 })
-export class ContactInfoFormComponent implements OnChanges, OnInit {
+export class ContactInfoFormComponent implements OnInit {
   @Input() existingContactsInfo: Socials[] = [];
   @Output() next = new EventEmitter<void>();
   @Output() changed = new EventEmitter<FormGroup>();
@@ -45,8 +45,6 @@ export class ContactInfoFormComponent implements OnChanges, OnInit {
   constructor(private formBuilder: UntypedFormBuilder) {}
 
   ngOnInit() {}
-
-  ngOnChanges() {}
 
   handleOnCloseDialog(event: DialogClosePayload) {
     const { dialogVisibility, selectedNodes = [] } = event;

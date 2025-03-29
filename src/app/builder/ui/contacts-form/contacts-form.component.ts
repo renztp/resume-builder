@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, Output, SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
 import {
   FormArray,
   FormGroup,
@@ -13,7 +13,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { ButtonModule } from 'primeng/button';
 import { Socials } from '@shared/models/socials';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { StepWizardService } from '~/app/shared/data-access/step-wizard.service';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-contacts-form',
@@ -22,7 +22,7 @@ import { StepWizardService } from '~/app/shared/data-access/step-wizard.service'
   templateUrl: './contacts-form.component.html',
   styleUrl: './contacts-form.component.scss',
 })
-export class ContactsFormComponent {
+export class ContactsFormComponent implements OnChanges {
   @Input() contactItems: Socials[] = [];
   @Input() selectedSocials: Socials[] = [];
   @Output() onFieldChange = new EventEmitter();
