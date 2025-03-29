@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ResumeData } from '../models/resume-data';
 
 enum Steps {
   BasicInfo = 0,
@@ -34,6 +35,10 @@ export class StepWizardService {
     const modifiedData = { ...this.resumeData.getValue() };
     modifiedData[key] = data;
     this.resumeData.next(modifiedData);
+  }
+
+  uploadResumeData(data: ResumeData) {
+    this.resumeData.next(data);
   }
 
   updateContactInfoForm(data: any) {
