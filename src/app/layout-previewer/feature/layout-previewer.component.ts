@@ -57,7 +57,7 @@ export class LayoutPreviewerComponent {
 
   applyIframeAttributes(dataUrl: string, iframe: HTMLIFrameElement) {
     iframe.src = dataUrl + '#toolbar=0';
-    iframe.height = '100%';
+    iframe.height = '95%';
     iframe.width = '95%';
     iframe.allowFullscreen = true;
     iframe.className = 'resume-iframe';
@@ -87,5 +87,9 @@ export class LayoutPreviewerComponent {
 
   downloadResume() {
     pdfMake.createPdf(minimalLayout(this.resumeData)).download();
+  }
+
+  downloadJson() {
+    console.log('downloadJson');
   }
 }

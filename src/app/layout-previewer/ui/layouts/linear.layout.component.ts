@@ -110,7 +110,7 @@ const processBasicInfo = (basicInfo: BasicInfo | undefined): Content[] => {
  * Work Experience
  */
 
-export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
+export function linearLayout(resumeData: ResumeData): TDocumentDefinitions {
   const { basicInfo, contactInfo, workExperience, education } = resumeData;
   const userLocation = basicInfo?.location;
   const userBio = basicInfo?.bio;
@@ -140,102 +140,93 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
     };
   });
 
-  const content: Content = [];
-  if (basicInfoContent.length > 0) {
-    content.push(basicInfoContent);
-  }
-  if (userContactsContent.length > 0) {
-    content.push({
-      text: [...userContactsContent],
-      margin: [0, 0, 0, 15],
-    });
-    content.push({
-      canvas: [
-        {
-          type: 'line',
-          x1: 0,
-          y1: 0,
-          x2: 515,
-          y2: 0,
-          lineWidth: 2,
-        },
-      ],
-      margin: [0, 0, 0, 15],
-    });
-  }
-  if (userBio) {
-    content.push({
-      columns: [
-        {
-          text: 'Summary',
-          style: 'sectionHeader',
-          width: 160,
-        },
-        {
-          text: userBio,
-        },
-      ],
-      margin: [0, 0, 0, 20],
-    });
-    content.push({
-      canvas: [
-        {
-          type: 'line',
-          x1: 0,
-          y1: 0,
-          x2: 515,
-          y2: 0,
-          lineWidth: 1,
-        },
-      ],
-      margin: [0, 0, 0, 15],
-    });
-  }
-  if (workExperiencesContent.length > 0) {
-    content.push({
-      columns: [
-        {
-          text: 'Work Experience',
-          style: 'sectionHeader',
-          width: 160,
-        },
-        {
-          stack: workExperiencesContent,
-        },
-      ],
-      margin: [0, 0, 0, 15],
-    });
-    content.push({
-      canvas: [
-        {
-          type: 'line',
-          x1: 0,
-          y1: 0,
-          x2: 515,
-          y2: 0,
-          lineWidth: 1,
-        },
-      ],
-      margin: [0, 0, 0, 15],
-    });
-  }
-  if (educationContent.length > 0) {
-    content.push({
-      columns: [
-        {
-          text: 'Education',
-          style: 'sectionHeader',
-          width: 160,
-        },
-        {
-          stack: educationContent,
-        },
-      ],
-    });
-  }
-
   return {
-    content: content,
+    content: [
+      ...basicInfoContent,
+      // { text: basicInfo?.name || '', style: 'name', margin: [0, 0, 0, 8] },
+      // { text: basicInfo?.occupation || '', style: 'occupationStyles', margin: [0, 0, 0, 8] },
+      {
+        text: [...userContactsContent],
+        margin: [0, 0, 0, 15],
+      },
+      {
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 2,
+          },
+        ],
+        margin: [0, 0, 0, 15],
+      },
+      {
+        columns: [
+          {
+            text: 'Summary',
+            style: 'sectionHeader',
+            width: 160,
+          },
+          {
+            text: userBio,
+          },
+        ],
+        margin: [0, 0, 0, 20],
+      },
+      {
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 1,
+          },
+        ],
+        margin: [0, 0, 0, 15],
+      },
+      {
+        columns: [
+          {
+            text: 'Work Experience',
+            style: 'sectionHeader',
+            width: 160,
+          },
+          {
+            stack: workExperiencesContent,
+          },
+        ],
+        margin: [0, 0, 0, 15],
+      },
+      {
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 1,
+          },
+        ],
+        margin: [0, 0, 0, 15],
+      },
+      {
+        columns: [
+          {
+            text: 'Education',
+            style: 'sectionHeader',
+            width: 160,
+          },
+          {
+            stack: educationContent,
+          },
+        ],
+      },
+    ],
     styles: {
       name: {
         fontSize: 24,
