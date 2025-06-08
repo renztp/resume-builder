@@ -20,7 +20,7 @@ export class LayoutChooserPageComponent {
   allLayouts = [
     {
       value: 'minimal',
-      imageUrl: '../../../assets/images/layout-1.png',
+      imageUrl: '../../../assets/images/layout-4.png',
     },
     {
       value: 'linear',
@@ -28,7 +28,7 @@ export class LayoutChooserPageComponent {
     },
     {
       value: 'detailed',
-      imageUrl: '../../../assets/images/layout-3.png',
+      imageUrl: '../../../assets/images/layout-5.png',
     },
   ];
 
