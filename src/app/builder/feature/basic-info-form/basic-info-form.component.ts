@@ -11,13 +11,11 @@ import { ToastModule } from 'primeng/toast';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { BasicInfo } from '../../../shared/models/basic';
 import { CommonModule } from '@angular/common';
-import { SocialsSelectorComponent } from '../../ui/socials-selector/socials-selector.component';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
-import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-basic-info-form',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     InputTextModule,
@@ -27,12 +25,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ButtonModule,
     CommonModule,
     ImageModule,
-    SocialsSelectorComponent,
-    InputTextareaModule,
+    TextareaModule,
   ],
   providers: [MessageService, HttpClient],
   templateUrl: './basic-info-form.component.html',
   styleUrl: './basic-info-form.component.scss',
+  standalone: true,
 })
 export class BasicInfoFormComponent {
   @Input() basicInfo: BasicInfo = {

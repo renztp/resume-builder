@@ -13,7 +13,6 @@ interface UploadEvent {
 
 @Component({
   selector: 'app-setup.page',
-  standalone: true,
   imports: [CardModule, ButtonModule, DialogModule, RouterLink, FileUploadModule],
   templateUrl: './setup.page.component.html',
   styleUrl: './setup.page.component.scss',

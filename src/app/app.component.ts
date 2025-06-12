@@ -6,10 +6,10 @@ import { LayoutPreviewerComponent } from './layout-previewer/feature/layout-prev
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, StepWizard, SidebarComponent, LayoutPreviewerComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  standalone: true,
 })
 export class AppComponent {
   title = 'resume-builder';

@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
 @Component({
   selector: 'app-layout-chooser.page',
-  standalone: true,
-  imports: [RadioButtonModule, FormsModule, ButtonModule, RouterLink],
+  imports: [RadioButtonModule, FormsModule, ButtonModule],
   templateUrl: './layout-chooser.page.html',
   styleUrl: './layout-chooser.page.scss',
+  standalone: true,
 })
 export class LayoutChooserPageComponent {
   layout!: string;

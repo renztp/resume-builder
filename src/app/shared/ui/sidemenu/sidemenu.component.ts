@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
 
 @Component({
   selector: 'app-sidemenu',
-  standalone: true,
   imports: [MenuModule],
   templateUrl: './sidemenu.component.html',
   styleUrl: './sidemenu.component.scss',
+  standalone: true,
 })
 export class SidemenuComponent {
   items: MenuItem[] | undefined;

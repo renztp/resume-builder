@@ -19,7 +19,6 @@ import { TreeNode } from 'primeng/api';
 
 @Component({
   selector: 'app-contact-info-form',
-  standalone: true,
   imports: [
     SocialsSelectorComponent,
     ContactsFormComponent,
@@ -31,6 +30,7 @@ import { TreeNode } from 'primeng/api';
   ],
   templateUrl: './contact-info-form.component.html',
   styleUrl: './contact-info-form.component.scss',
+  standalone: true,
 })
 export class ContactInfoFormComponent implements OnInit {
   @Input() existingContactsInfo: Socials[] = [];

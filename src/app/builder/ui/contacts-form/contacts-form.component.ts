@@ -17,10 +17,10 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-contacts-form',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, InputTextModule, ButtonModule, InputGroupModule],
   templateUrl: './contacts-form.component.html',
   styleUrl: './contacts-form.component.scss',
+  standalone: true,
 })
 export class ContactsFormComponent implements OnChanges {
   @Input() contactItems: Socials[] = [];

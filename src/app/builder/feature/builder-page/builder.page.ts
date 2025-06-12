@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { MenuItem } from 'primeng/api';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { SidebarComponent } from '../../../shared/ui/sidebar/sidebar.component';
 import { LayoutPreviewerComponent } from '../../../layout-previewer/feature/layout-previewer.component';
 import { ButtonModule } from 'primeng/button';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,29 +15,26 @@ import { EducationFormComponent } from '../education-form/education-form.compone
 import { BasicInfo } from '../../../shared/models/basic';
 import { WorkExperience } from '../../../shared/models/work-experience';
 import { Education } from '../../../shared/models/education';
-import { SidemenuComponent } from '../../../shared/ui/sidemenu/sidemenu.component';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { ContactInfoFormComponent } from '../contact-info-form/contact-info-form.component';
 import { Socials } from '@shared/models/socials';
 
 @Component({
   selector: 'app-builder.page',
-  standalone: true,
   imports: [
     FormsModule,
     CommonModule,
     TabMenuModule,
-    SidebarComponent,
     LayoutPreviewerComponent,
     ButtonModule,
     BasicInfoFormComponent,
     WorkExperienceFormComponent,
     EducationFormComponent,
-    SidemenuComponent,
     ContactInfoFormComponent,
   ],
   templateUrl: './builder.page.html',
   styleUrl: './builder.page.scss',
+  standalone: true,
 })
 export class BuilderPageComponent {
   resumeData: ResumeData;

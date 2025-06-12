@@ -7,10 +7,10 @@ import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-layout-previewer',
-  standalone: true,
   imports: [ButtonModule],
   templateUrl: './layout-previewer.component.html',
   styleUrl: './layout-previewer.component.scss',
+  standalone: true,
 })
 export class LayoutPreviewerComponent {
   layout: string | null = '';

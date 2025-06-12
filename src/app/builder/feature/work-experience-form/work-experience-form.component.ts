@@ -22,7 +22,6 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-work-experience-form',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -37,6 +36,7 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
   providers: [MessageService],
   templateUrl: './work-experience-form.component.html',
   styleUrl: './work-experience-form.component.scss',
+  standalone: true,
 })
 export class WorkExperienceFormComponent {
   @Input() workExperience: WorkExperience[] = [];

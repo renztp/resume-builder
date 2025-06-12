@@ -20,7 +20,6 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-education-form',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -34,6 +33,7 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
   ],
   templateUrl: './education-form.component.html',
   styleUrl: './education-form.component.scss',
+  standalone: true,
 })
 export class EducationFormComponent {
   @Input() education: Education[] = [];
