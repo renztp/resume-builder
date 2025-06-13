@@ -1,4 +1,4 @@
-<form class="panel border rounded border-gray-400 mt-24 grid grid-cols-[25vw_33vw]" [formGroup]="formGroup">
+<form class="panel border rounded border-gray-400 mt-24 grid grid-cols-[25vw_33vw]" [formGroup]="formGroup" (ngSubmit)="register()">
   <div class="flex items-center justify-center border-r border-gray-400">background</div>
   <div class="p-6">
     <h1 class="font-bold text-lg mb-4">Register</h1>
@@ -21,16 +21,16 @@
     </div>
     <div class="columns-2 mb-4">
       <div class="flex flex-col gap-1">
-        <label for="firstname">Password</label>
-        <input pInputText id="firstname" type="password" aria-describedby="username-help" />
+        <label for="password">Password</label>
+        <input pInputText id="password" type="password" aria-describedby="username-help" formControlName="password" />
       <small id="password-help"></small>
       </div>
       <div class="flex flex-col gap-1">
         <label for="retype-password">Re-type Password</label>
-        <input pInputText id="retype-password" type="password" aria-describedby="username-help" />
+        <input pInputText id="retype-password" type="password" aria-describedby="username-help" formControlName="retypePassword" />
         <small id="retype-password-help"></small>
       </div>
     </div>
-    <div class="flex"><p-button class="ml-auto" label="Login" type="submit" /></div>
+    <div class="flex"><p-button class="ml-auto" label="Register" type="submit" /></div>
   </div>
 </form>

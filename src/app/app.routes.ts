@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { BuilderPageComponent } from './builder/feature/builder-page/builder.page';
 import { LayoutChooserPageComponent } from './layout-chooser/feature/layout-chooser.page';
 import { SetupPageComponent } from './setup/setup.page.component';
-import { AuthRegisterPage } from './auth/feature/auth-register/auth-register.page';
-import { AuthLoginPage } from './auth/feature/auth-login/auth-login.page';
+import { AuthRegisterPage } from './auth/feature/auth-register/auth-register-page.component';
+import { AuthLoginPage } from './auth/feature/auth-login/auth-login-page.component';
 
 export const routes: Routes = [
   { path: '', component: SetupPageComponent },
