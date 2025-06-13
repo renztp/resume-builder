@@ -1,9 +1,16 @@
 @layer normalize, primeng;
 
-@import 'normalize.css' layer(normalize-reset);
+/* @import 'normalize.css' layer(normalize-reset); */
+@import 'tailwindcss';
+@plugin "tailwindcss-primeui";
 @import 'primeicons/primeicons.css';
 @import '../node_modules/quill/dist/quill.core.css';
 @import '../node_modules/quill/dist/quill.snow.css';
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../public/fonts/Inter-VariableFont_opsz\,wght.ttf') format('truetype');
+}
 
 // Global styles
 html,
@@ -12,6 +19,7 @@ body {
   padding: 0;
   height: 100%;
   background: #ecf0f9;
+  font-family: 'Inter';
 }
 
 .g-align-right {

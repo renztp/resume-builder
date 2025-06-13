@@ -1,0 +1,36 @@
+<form class="panel border rounded border-gray-400 mt-24 grid grid-cols-[25vw_33vw]" [formGroup]="formGroup">
+  <div class="flex items-center justify-center border-r border-gray-400">background</div>
+  <div class="p-6">
+    <h1 class="font-bold text-lg mb-4">Register</h1>
+    <div class="columns-2 mb-4">
+      <div class="flex flex-col gap-1">
+        <label for="firstname">First Name</label>
+        <input pInputText id="firstname" type="text" aria-describedby="username-help" formControlName="firstName" />
+        <small id="firstname-help"></small>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="lastname">Last Name</label>
+        <input pInputText id="lastname" type="text" aria-describedby="username-help" formControlName="lastName" />
+        <small id="lastname-help"></small>
+      </div>
+    </div>
+    <div class="flex flex-col gap-1 mb-4">
+      <label for="email">Email</label>
+      <input pInputText type="email" id="email" aria-describedby="username-help" formControlName="email" />
+      <small id="email-help"></small>
+    </div>
+    <div class="columns-2 mb-4">
+      <div class="flex flex-col gap-1">
+        <label for="firstname">Password</label>
+        <input pInputText id="firstname" type="password" aria-describedby="username-help" />
+      <small id="password-help"></small>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="retype-password">Re-type Password</label>
+        <input pInputText id="retype-password" type="password" aria-describedby="username-help" />
+        <small id="retype-password-help"></small>
+      </div>
+    </div>
+    <div class="flex"><p-button class="ml-auto" label="Login" type="submit" /></div>
+  </div>
+</form>
