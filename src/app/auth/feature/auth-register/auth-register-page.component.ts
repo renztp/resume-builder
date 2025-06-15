@@ -36,8 +36,7 @@ export class AuthRegisterPage {
   }
 
   register() {
-    const { firstName, lastName, email, password } = this.formGroup.value;
-    this.authService.register({ firstName, lastName, email, password }).subscribe({
+    this.authService.register(this.formGroup.value).subscribe({
       next: (resp: AuthResponse) => {
         this.authService.setToken(resp.token);
         const token = this.authService.getToken();

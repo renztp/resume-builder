@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { RegisterRequest } from '~/app/shared/models/auth';
+import { AuthResponse, loginRequest, RegisterRequest } from '~/app/shared/models/auth';
 import { environment } from '~/environment/environment';
 
 @Injectable({
@@ -28,5 +28,9 @@ export class AuthService {
 
   register(request: RegisterRequest): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/signup`, request);
+  }
+
+  login(request: loginRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/auth/login`, request);
   }
 }
