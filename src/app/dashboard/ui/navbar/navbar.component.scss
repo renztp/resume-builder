@@ -1,0 +1,15 @@
+:host {
+  .logo {
+    height: 29px;
+    width: 96px;
+    background: gray;
+  }
+  nav li {
+    list-style: none;
+    margin-right: 30px;
+
+    &:last {
+      margin-right: 0;
+    }
+  }
+}
