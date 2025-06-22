@@ -4,8 +4,9 @@ import { Socials } from './socials';
 import { WorkExperience } from './work-experience';
 
 export interface ResumeData {
-  basicInfo: BasicInfo;
-  contactInfo: Socials[];
-  workExperience: WorkExperience[];
-  education: Education[];
+  resumeName: string;
+  basicInfo?: BasicInfo;
+  contactInfo?: Socials[];
+  workExperience?: WorkExperience[];
+  education?: Education[];
 }

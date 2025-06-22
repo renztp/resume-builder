@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 export class LayoutPreviewerComponent {
   layout: string | null = '';
   resumeData: ResumeData = {
+    resumeName: '',
     basicInfo: {
       name: '',
       occupation: '',

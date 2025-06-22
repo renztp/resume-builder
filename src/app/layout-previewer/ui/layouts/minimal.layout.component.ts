@@ -125,8 +125,8 @@ export function minimalLayout(resumeData: ResumeData): TDocumentDefinitions {
   }
 
   const basicInfoContent = processBasicInfo(basicInfo);
-  const workExperiencesContent = processWorkExperience(workExperience);
-  const educationContent = processEducation(education);
+  const workExperiencesContent = workExperience && processWorkExperience(workExperience);
+  const educationContent = education && processEducation(education);
   const userContactsContent = userContacts.map((contact) => {
     if (contact.name === userContacts[userContacts.length - 1].name) {
       return {

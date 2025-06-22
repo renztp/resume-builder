@@ -1,1 +1,12 @@
-<p>resumes works!</p>
+<div class="resumes-wrapper grid grid-cols-3 gap-x-8">
+  <div *ngFor="let resume of resumes" class="mb-10">
+    <div class="resumes-graphic h-[300px] w-full border border-gray-500 mb-2"></div>
+    <div class="flex justify-between">
+      <h3 class="font-bold text-md">{{resume.resumeName}}</h3>
+      <div>
+        <span class="pi pi-pen-to-square mr-2"></span>
+        <span class="pi pi-pen-to-square"></span>
+      </div>
+    </div>
+  </div>
+</div>
