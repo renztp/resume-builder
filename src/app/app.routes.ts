@@ -11,6 +11,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BasicInfoFormComponent } from './builder/feature/basic-info-form/basic-info-form.component';
 import { ContactInfoFormComponent } from './builder/feature/contact-info-form/contact-info-form.component';
 import { WorkExperienceFormComponent } from './builder/feature/work-experience-form/work-experience-form.component';
+import { EducationFormComponent } from './builder/feature/education-form/education-form.component';
 
 export const routes: Routes = [
   { path: '', component: SetupPageComponent },
@@ -46,6 +47,10 @@ export const routes: Routes = [
       {
         path: 'work-experience',
         component: WorkExperienceFormComponent,
+      },
+      {
+        path: 'education',
+        component: EducationFormComponent,
       },
     ],
   },
