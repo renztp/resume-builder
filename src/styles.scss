@@ -81,3 +81,11 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: 57px;
+  max-height: 57px;
+}

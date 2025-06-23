@@ -1,17 +1,19 @@
-<div class="form-header">
-  <h2>Contact Info</h2>
-  <p-button
-    icon="pi pi-address-book"
-    label="Edit"
-    size="small"
-    (click)="socialLinksVisible = true"
-  ></p-button>
+<div class="">
+  <div class="form-header top-bar border-[#CCCCCC] border-b-1 px-4">
+    <h2>Contact Info</h2>
+    <p-button
+      icon="pi pi-address-book"
+      label="Edit"
+      size="small"
+      (click)="socialLinksVisible = true"
+    ></p-button>
+  </div>
+
+  <app-contacts-form [contactItems]="formContacts"></app-contacts-form>
+
+  <app-socials-selector
+    [isDialogOpen]="socialLinksVisible"
+    [existingSelectedContacts]="preSelectedContacts"
+    (onCloseDialog)="handleOnCloseDialog($event)"
+  />
 </div>
-
-<app-contacts-form [contactItems]="formContacts"></app-contacts-form>
-
-<app-socials-selector
-  [isDialogOpen]="socialLinksVisible"
-  [existingSelectedContacts]="preSelectedContacts"
-  (onCloseDialog)="handleOnCloseDialog($event)"
-/>

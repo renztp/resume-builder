@@ -1,11 +1,20 @@
+<div class="header flex justify-between align-middle items-center mb-6">
+  <h1 class="text-2xl font-bold">Dashboard</h1>
+  <div class="filter flex items-center">
+    <span class="mr-2">Sort By:</span>
+    <form [formGroup]="formGroup" class="card flex justify-center">
+      <p-select formControlName="selectedCity" [options]="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
+    </form>
+  </div>
+</div>
 <div class="resumes-wrapper grid grid-cols-3 gap-x-8">
-  <div *ngFor="let resume of resumes" class="mb-10">
-    <div class="resumes-graphic h-[300px] w-full border border-gray-500 mb-2"></div>
+  <div *ngFor="let resume of resumes" class="mb-10 cursor-pointer" [routerLink]="['/resume', resume.id]">
+    <div class="resumes-graphic h-[350px] w-full border border-gray-500 mb-2"></div>
     <div class="flex justify-between">
       <h3 class="font-bold text-md">{{resume.resumeName}}</h3>
       <div>
         <span class="pi pi-pen-to-square mr-2"></span>
-        <span class="pi pi-pen-to-square"></span>
+        <span class="pi pi-trash text-red-500"></span>
       </div>
     </div>
   </div>

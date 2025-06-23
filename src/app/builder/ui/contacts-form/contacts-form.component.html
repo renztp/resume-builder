@@ -1,5 +1,5 @@
 @if(availableContacts.length > 0) {
-  <form [formGroup]="contactsFormGroup" *ngIf="!loading">
+  <form [formGroup]="contactsFormGroup" *ngIf="!loading" class="px-4 py-4">
     <ng-container formArrayName="contacts">
       <ng-container *ngFor="let contact of contacts.controls; let i = index" [formGroupName]="i">
         <p-inputGroup *ngIf="!contacts.controls[i].value.disabled">
@@ -11,6 +11,6 @@
   </form>
 }
 @else {
-  <p>Please click Edit to add new contacts.</p>
+  <p class="py-4 px-4">Please click Edit to add new contacts.</p>
 }
 

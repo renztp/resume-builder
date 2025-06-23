@@ -1,0 +1,47 @@
+<!-- <app-builder-navbar></app-builder-navbar> -->
+<div class="comp-control-sidebar">
+  <div class="top-bar px-4 border-[#CCCCCC] border-b-1">
+    <button type="" class="cursor-pointer"><i class="pi pi-angle-left mr-2"></i>Go Back</button>
+  </div>
+  <div class="sidebar-area">
+    <div class="flex justify-between items-center py-4 px-4 border-[#CCCCCC] border-b-1">
+      <span class="cursor-pointer" [routerLink]="['basic-info']">Basic Information</span>
+      <span class="flex">
+        <i class="pi pi-minus"></i>
+      </span>
+    </div>
+    <div class="flex justify-between items-center py-4 px-4 border-[#CCCCCC] border-b-1">
+      <span class="cursor-pointer" [routerLink]="['contacts-info']">Contacts</span>
+      <span class="flex">
+        <i class="pi pi-plus"></i>
+      </span>
+    </div>
+    <div class="flex justify-between items-center py-4 px-4 border-[#CCCCCC] border-b-1">
+      <span class="cursor-pointer">Work Experience</span>
+      <span class="flex">
+        <i class="pi pi-plus"></i>
+      </span>
+    </div>
+    <div class="flex justify-between items-center py-4 px-4 border-[#CCCCCC] border-b-1">
+      <span class="cursor-pointer">Education</span>
+      <span class="flex">
+        <i class="pi pi-plus"></i>
+      </span>
+    </div>
+    <div class="flex justify-between items-center py-4 px-4 border-[#CCCCCC] border-b-1">
+      <span class="cursor-pointer">References</span>
+      <span class="flex">
+        <i class="pi pi-plus"></i>
+      </span>
+    </div>
+    <div class="flex justify-between items-center py-4 px-4 border-[#CCCCCC] border-b-1">
+      <span class="cursor-pointer">Misc</span>
+      <span class="flex">
+        <i class="pi pi-plus"></i>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="builder-area">
+  <router-outlet></router-outlet>
+</div>

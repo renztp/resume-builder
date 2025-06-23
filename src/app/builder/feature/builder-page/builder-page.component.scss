@@ -1,0 +1,13 @@
+:host {
+  display: grid;
+  grid-template-columns: 20vw 30vw 1fr;
+
+  & > div {
+    /* padding: 0 20px; */
+    height: 100vh;
+
+    &:not(last) {
+      border-right: 1px solid #ccc;
+    }
+  }
+}
