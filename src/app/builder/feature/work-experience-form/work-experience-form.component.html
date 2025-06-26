@@ -1,5 +1,7 @@
-<h2>Work Experience</h2>
-<form [formGroup]="formGroup" *ngIf="!loading && workExperiences.length > 0" class="px-4">
+<div class="form-header top-bar border-[#CCCCCC] border-b-1 px-4">
+  <h2>Work Experience</h2>
+</div>
+<form [formGroup]="formGroup" *ngIf="!loading && workExperiences.length > 0" class="px-4 py-4">
   <div>
     <!-- TODO: Make this more readable and clean, maybe create a reusable component -->
     <p-accordion
@@ -61,4 +63,5 @@
     </p-accordion>
   </div>
 </form>
-<p-button (click)="addWorkExperience()">Add Job Experience</p-button>
+<br>
+<p-button (click)="addWorkExperience()" class="ml-4">Add Job Experience</p-button>

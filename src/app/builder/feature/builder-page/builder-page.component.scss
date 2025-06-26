@@ -1,6 +1,6 @@
 :host {
   display: grid;
-  grid-template-columns: 20vw 30vw 1fr;
+  grid-template-columns: 15vw 30vw 1fr;
 
   & > div {
     /* padding: 0 20px; */
@@ -9,5 +9,9 @@
     &:not(last) {
       border-right: 1px solid #ccc;
     }
+  }
+
+  .builder-area {
+    position: relative;
   }
 }

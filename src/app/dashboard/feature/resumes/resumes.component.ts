@@ -5,7 +5,7 @@ import { SelectModule } from 'primeng/select';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-interface City {
+interface FilterType {
   name: string;
   code: string;
 }
@@ -18,7 +18,7 @@ interface City {
   standalone: true,
 })
 export class ResumesComponent implements OnInit {
-  cities: City[] | undefined;
+  filterType: FilterType[] | undefined;
   formGroup!: FormGroup;
   resumes: ResumeData[] = [
     {
@@ -45,16 +45,14 @@ export class ResumesComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' },
+    this.filterType = [
+      { name: 'Modified', code: 'mdf' },
+      { name: 'Ascending', code: 'asc' },
+      { name: 'Descending', code: 'dsc' },
     ];
 
     this.formGroup = new FormGroup({
-      selectedCity: new FormControl<City | null>(null),
+      selectedFilter: new FormControl<FilterType | null>(null),
     });
 
     this.formGroup.controls['selectedCity'].valueChanges.subscribe((v) => console.log(v));
