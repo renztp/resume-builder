@@ -42,7 +42,11 @@
     </div>
   </div>
 </div>
-<div class="builder-area">
+<div class="resume-in builder-area">
   <router-outlet></router-outlet>
   <app-builder-action-bar></app-builder-action-bar>
+</div>
+<div class="resume-out">
+  <div *ngIf="resumeData">{{ resumeData | json }}</div>
+  <app-saving-indicator [isSaving]="savingState"></app-saving-indicator>
 </div>

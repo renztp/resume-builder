@@ -6,6 +6,7 @@
 @import 'primeicons/primeicons.css';
 @import '../node_modules/quill/dist/quill.core.css';
 @import '../node_modules/quill/dist/quill.snow.css';
+@import './variables.css';
 
 @font-face {
   font-family: 'Inter';
@@ -17,7 +18,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #ecf0f9;
+  //   background: #ecf0f9;
+  background: var(--background-bg);
   font-family: 'Inter';
 }
 
@@ -46,11 +48,11 @@ body {
   gap: 15px;
 }
 
-.accordion-item {
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
+// .accordion-item {
+//   padding: 15px;
+//   border-radius: 8px;
+//   margin-bottom: 30px;
+// }
 
 .m-0 {
   margin: 0;

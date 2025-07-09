@@ -21,9 +21,11 @@ export class StepWizardService {
     workExperience: [],
     education: [],
   });
+  private isSaving = new BehaviorSubject<boolean>(false);
   layout$ = this.selectedLayout.asObservable();
   resumeData$ = this.resumeData.asObservable();
   contactInfoForm$ = this.contactInfoForm.asObservable();
+  savingState$ = this.isSaving.asObservable();
 
   constructor() {}
 
@@ -43,5 +45,9 @@ export class StepWizardService {
 
   updateContactInfoForm(data: any) {
     this.contactInfoForm.next(data);
+  }
+
+  triggerSave(state: boolean) {
+    this.isSaving.next(state);
   }
 }
