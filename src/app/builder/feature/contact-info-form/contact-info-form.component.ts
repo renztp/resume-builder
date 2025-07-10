@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   DialogClosePayload,
   SocialsSelectorComponent,
@@ -16,6 +24,7 @@ import { ContactsFormComponent } from '../../ui/contacts-form/contacts-form.comp
 import { Socials } from '@shared/models/socials';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { TreeNode } from 'primeng/api';
+import { StepWizardService } from '../../../shared/data-access/step-wizard.service';
 
 @Component({
   selector: 'app-contact-info-form',
@@ -42,12 +51,27 @@ export class ContactInfoFormComponent implements OnInit {
   socialLinksVisible = false;
   loading: boolean = false;
 
-  constructor(private formBuilder: UntypedFormBuilder) {}
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private stepWizardService: StepWizardService,
+  ) {
+    this.stepWizardService.resumeData$.subscribe(({ contactInfo }) => {
+      if (contactInfo?.length > 0) {
+        this.contacts = contactInfo;
+        this.formContacts = contactInfo;
+      }
+    });
+  }
 
   ngOnInit() {}
 
   handleOnCloseDialog(event: DialogClosePayload) {
-    const { dialogVisibility, selectedNodes = [] } = event;
+    const { dialogVisibility, selectedNodes } = event;
+
+    if (!selectedNodes) {
+      this.socialLinksVisible = dialogVisibility;
+      return;
+    }
 
     if (selectedNodes?.length === 0) {
       this.formContacts = [];

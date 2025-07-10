@@ -36,7 +36,7 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
   standalone: true,
 })
 export class EducationFormComponent {
-  @Input() education: Education[] = [];
+  education: Education[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
   formGroup: FormGroup;
 
@@ -56,6 +56,8 @@ export class EducationFormComponent {
         const { educations } = value;
         this.stepWizardService.updateResumeData('education', educations);
       });
+
+    this.loadEducation();
   }
 
   ngOnInit() {
@@ -98,6 +100,14 @@ export class EducationFormComponent {
       startYear: [null, [Validators.required]],
       endYear: [null],
       description: [null],
+    });
+  }
+
+  private loadEducation() {
+    this.stepWizardService.resumeData$.subscribe(({ education }) => {
+      if (education?.length > 0) {
+        this.education = education;
+      }
     });
   }
 

@@ -1,6 +1,6 @@
 <div class="top-bar py-4 px-4 border-[#CCCCCC] border-b-1">
   <h1 class="text-md font-bold">Basic Information</h1>
-  <button (click)="toggleSaving()">Save</button>
+  <!-- <button (click)="toggleSaving()">Save</button> -->
   <!-- <button type="" class="cursor-pointer"><i class="pi pi-angle-left mr-2"></i>Go Back</button> -->
 </div>
 <form [formGroup]="formGroup" class="py-4 px-4">
@@ -31,7 +31,7 @@
       </div>
       <div class="e-input">
         <label for="username">Bio</label>
-        <textarea id="" formControlName="bio" pTextarea cols="30" rows="10"></textarea>
+        <textarea id="" formControlName="bio" pTextarea rows="6"></textarea>
         <!-- <p-editor formControlName="bio" [style]="{ height: '210px' }"> -->
         <!-- <ng-template pTemplate="header"> -->
         <!--   <span class="ql-formats"> -->

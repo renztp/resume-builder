@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { MessageService } from 'primeng/api';
@@ -33,7 +33,7 @@ import { BasicInfo } from '../../../shared/models/basic';
   standalone: true,
 })
 export class BasicInfoFormComponent {
-  @Input() basicInfo: BasicInfo = {
+  basicInfo: BasicInfo = {
     name: '',
     occupation: '',
     email: '',
@@ -68,6 +68,8 @@ export class BasicInfoFormComponent {
         const { basicInfo } = value;
         this.stepWizardService.updateResumeData('basicInfo', basicInfo);
       });
+
+    this.loadBasicInfoData();
   }
 
   toggleSaving() {
@@ -75,28 +77,9 @@ export class BasicInfoFormComponent {
   }
 
   ngOnInit() {
-    // for(const basicInfoData of Object.keys(this.basicInfo)) {
-    //   if(!this.basicInfo) {
-    //     this.formGroup.controls['basicInfo'] = this.formBuilder.group({
-    //       [basicInfoData]: this.basicInfo[basicInfoData]
-    //     })
-    //   }
-    // }
     if (this.basicInfo) {
       this.assignExistingBasicInfoToForm(this.basicInfo);
     }
-
-    this.loadBasicInfoData();
-  }
-
-  loadBasicInfoData() {
-    this.stepWizardService.resumeData$.subscribe((data) => {
-      for (const key of Object.keys(data.basicInfo)) {
-        if (!!data.basicInfo[key]) {
-          this.formGroup.controls['basicInfo'].get(key)?.setValue(data.basicInfo[key]);
-        }
-      }
-    });
   }
 
   onUpload(event: any) {
@@ -104,6 +87,14 @@ export class BasicInfoFormComponent {
       severity: 'info',
       summary: 'Success',
       detail: 'File Uploaded with Basic Mode',
+    });
+  }
+
+  private loadBasicInfoData() {
+    this.stepWizardService.resumeData$.subscribe((data) => {
+      if (data && data.basicInfo) {
+        this.basicInfo = data.basicInfo;
+      }
     });
   }
 

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ResumeData } from '../../../shared/models/resume-data';
 import {
   FormArray,
   FormGroup,
@@ -19,6 +18,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import { MessageService } from 'primeng/api';
 import { StepWizardService } from '@shared/data-access/step-wizard.service';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-work-experience-form',
@@ -32,6 +32,7 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
     AccordionModule,
     CalendarModule,
     CheckboxModule,
+    TextareaModule,
   ],
   providers: [MessageService],
   templateUrl: './work-experience-form.component.html',
@@ -39,7 +40,7 @@ import { StepWizardService } from '@shared/data-access/step-wizard.service';
   standalone: true,
 })
 export class WorkExperienceFormComponent {
-  @Input() workExperience: WorkExperience[] = [];
+  workExperience: WorkExperience[] = [];
   @Output() changed = new EventEmitter<FormGroup>();
   activeIndex: number[] = [];
   formGroup: FormGroup;
@@ -62,6 +63,8 @@ export class WorkExperienceFormComponent {
         const { workExperiences } = value;
         this.stepWizardService.updateResumeData('workExperience', workExperiences);
       });
+
+    this.loadWorkExperiences();
   }
 
   ngOnInit() {
@@ -71,6 +74,16 @@ export class WorkExperienceFormComponent {
     } else {
       this.loading = false;
     }
+  }
+
+  private loadWorkExperiences() {
+    this.stepWizardService.resumeData$.subscribe(({ workExperience }) => {
+      if (workExperience?.length > 0) {
+        this.workExperience = workExperience;
+      } else {
+        this.loading = false;
+      }
+    });
   }
 
   private assignExistingWorkExperience(workExperience: WorkExperience[]) {
