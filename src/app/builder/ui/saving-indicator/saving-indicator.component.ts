@@ -7,6 +7,7 @@ import { StepWizardService } from '../../../shared/data-access/step-wizard.servi
   imports: [CommonModule],
   templateUrl: './saving-indicator.component.html',
   styleUrl: './saving-indicator.component.scss',
+  standalone: true,
 })
 export class SavingIndicatorComponent {
   @Input() isSaving: boolean = false;

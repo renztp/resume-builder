@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '../../data-access/auth.service';
 import { AuthResponse } from '~/app/shared/models/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-register-page',
@@ -25,6 +26,7 @@ export class AuthRegisterPage {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
+    private router: Router,
   ) {
     this.formGroup = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
@@ -40,7 +42,9 @@ export class AuthRegisterPage {
       next: (resp: AuthResponse) => {
         this.authService.setToken(resp.token);
         const token = this.authService.getToken();
-        console.log(`Token is ${token} hehehe`);
+        if (token) {
+          this.router.navigate(['dashboard']);
+        }
       },
       error: (err) => {
         console.error(err);

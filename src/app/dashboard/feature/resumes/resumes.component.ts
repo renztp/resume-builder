@@ -42,9 +42,7 @@ export class ResumesComponent implements OnInit {
       resumeName: 'Resume Test 5',
     },
   ];
-  constructor() {}
-
-  ngOnInit() {
+  constructor() {
     this.filterType = [
       { name: 'Modified', code: 'mdf' },
       { name: 'Ascending', code: 'asc' },
@@ -55,8 +53,10 @@ export class ResumesComponent implements OnInit {
       selectedFilter: new FormControl<FilterType | null>(null),
     });
 
-    this.formGroup.controls['selectedCity'].valueChanges.subscribe((v) => console.log(v));
+    this.formGroup.controls['selectedFilter'].valueChanges.subscribe((v) => console.log(v));
   }
+
+  ngOnInit() {}
 
   private loadResumes() {}
 }
