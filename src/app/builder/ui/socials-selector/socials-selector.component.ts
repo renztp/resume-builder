@@ -42,8 +42,14 @@ export class SocialsSelectorComponent implements OnInit {
     });
   }
 
-  closeDialog() {
+  test(event: any) {
+    console.log(event);
     this.onCloseDialog.emit({ dialogVisibility: false });
+  }
+
+  closeDialog() {
+    console.log(this.selectedContacts);
+    this.onCloseDialog.emit({ dialogVisibility: false, selectedNodes: this.selectedContacts });
   }
 
   buildSocialsTree(existingSelectedSocials?: string[]) {

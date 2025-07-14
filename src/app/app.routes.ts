@@ -37,6 +37,11 @@ export const routes: Routes = [
     component: BuilderPageComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'basic-info',
+      },
+      {
         path: 'basic-info',
         component: BasicInfoFormComponent,
       },

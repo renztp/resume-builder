@@ -1,23 +1,15 @@
 <div class="form-header top-bar border-[#CCCCCC] border-b-1 px-4">
   <h2>Work Experience</h2>
 </div>
-<form [formGroup]="formGroup" *ngIf="!loading && workExperiences.length > 0" class="px-4 py-4">
+<form [formGroup]="formGroup" *ngIf="!loading && workExperiences.length > 0" class="">
   <div>
     <!-- TODO: Make this more readable and clean, maybe create a reusable component -->
-    <p-accordion
-      [multiple]="true"
-      class="work-experience-wrapper"
-      (onOpen)="onOpen($event)"
-      (onClose)="onClose($event)"
-      [activeIndex]="activeIndex"
-    >
+    <p-accordion [multiple]="true" class="work-experience-wrapper" (onOpen)="onOpen($event)" (onClose)="onClose($event)"
+                 [activeIndex]="activeIndex">
       <div formArrayName="workExperiences">
-        <p-accordionTab
-          [header]="workExperiences.controls[i].value.companyName || 'Work Experience ' + (i + 1)"
-          class="accordion-item"
-          *ngFor="let workExperience of workExperiences.controls; let i = index"
-          [formGroupName]="i"
-        >
+        <p-accordionTab [header]="workExperiences.controls[i].value.companyName || 'Work Experience ' + (i + 1)"
+                        class="accordion-item" *ngFor="let workExperience of workExperiences.controls; let i = index"
+                        [formGroupName]="i">
           <div class="e-input">
             <label for="username">Company Name</label>
             <input pInputText id="companyName" formControlName="companyName" />
@@ -40,22 +32,17 @@
             </div>
             <div>
               <label for="present-checkbox">Present</label>
-              <p-checkbox
-                id="present-checkbox"
-                formControlName="present"
-                value="present"
-                (click)="togglePresent(i)"
-                inputId="binary"
-              />
+              <p-checkbox id="present-checkbox" formControlName="present" value="present" (click)="togglePresent(i)"
+                          inputId="binary" />
             </div>
-          </div>
-          <div class="e-input">
-            <label for="username">Description</label>
-            <input pInputText id="description" formControlName="description" />
           </div>
           <div class="e-input">
             <label for="username">Url</label>
             <input pInputText id="url" formControlName="url" />
+          </div>
+          <div class="e-input">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" pTextarea rows="6"></textarea>
           </div>
           <p-button label="Delete Item" severity="danger" (click)="removeWorkExperience(i)" />
         </p-accordionTab>

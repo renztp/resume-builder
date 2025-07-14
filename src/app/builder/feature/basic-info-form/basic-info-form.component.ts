@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
-import { ImageModule } from 'primeng/image';
+import { StepWizardService } from '@shared/data-access/step-wizard.service';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ImageModule } from 'primeng/image';
 import { InputTextModule } from 'primeng/inputtext';
+import { TextareaModule } from 'primeng/textarea';
 import { ToastModule } from 'primeng/toast';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { BasicInfo } from '../../../shared/models/basic';
-import { CommonModule } from '@angular/common';
-import { StepWizardService } from '@shared/data-access/step-wizard.service';
-import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-basic-info-form',
@@ -33,7 +33,7 @@ import { TextareaModule } from 'primeng/textarea';
   standalone: true,
 })
 export class BasicInfoFormComponent {
-  @Input() basicInfo: BasicInfo = {
+  basicInfo: BasicInfo = {
     name: '',
     occupation: '',
     email: '',
@@ -68,16 +68,15 @@ export class BasicInfoFormComponent {
         const { basicInfo } = value;
         this.stepWizardService.updateResumeData('basicInfo', basicInfo);
       });
+
+    this.loadBasicInfoData();
+  }
+
+  toggleSaving() {
+    this.stepWizardService.triggerSave(true);
   }
 
   ngOnInit() {
-    // for(const basicInfoData of Object.keys(this.basicInfo)) {
-    //   if(!this.basicInfo) {
-    //     this.formGroup.controls['basicInfo'] = this.formBuilder.group({
-    //       [basicInfoData]: this.basicInfo[basicInfoData]
-    //     })
-    //   }
-    // }
     if (this.basicInfo) {
       this.assignExistingBasicInfoToForm(this.basicInfo);
     }
@@ -88,6 +87,14 @@ export class BasicInfoFormComponent {
       severity: 'info',
       summary: 'Success',
       detail: 'File Uploaded with Basic Mode',
+    });
+  }
+
+  private loadBasicInfoData() {
+    this.stepWizardService.resumeData$.subscribe((data) => {
+      if (data && data.basicInfo) {
+        this.basicInfo = data.basicInfo;
+      }
     });
   }
 

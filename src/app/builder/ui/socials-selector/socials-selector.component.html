@@ -2,6 +2,7 @@
   header="Edit Profile"
   [modal]="true"
   [(visible)]="isDialogOpen"
+  (visibleChange)="test($event)"
   [style]="{ width: '25rem' }"
 >
   <div class="card border border-gray-300" *ngIf="treeData">
@@ -13,8 +14,8 @@
     />
   </div>
   <br />
-  <div class="social-selector-buttons">
-    <p-button label="Cancel" severity="secondary" (click)="closeDialog()" />
-    <p-button label="Save" (click)="saveClicked()" />
+  <div class="social-selector-buttons flex justify-end">
+    <!-- <p-button label="Cancel" severity="secondary" (click)="closeDialog()" /> -->
+    <p-button label="Save" (click)="saveClicked()"/>
   </div>
 </p-dialog>
